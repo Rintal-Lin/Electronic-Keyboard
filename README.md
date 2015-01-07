@@ -1,0 +1,1 @@
+I designed an electronic keyboard based on ATmega16, which can be used for real-time music performance and music recording.<br/>Its main control program was written in C.
