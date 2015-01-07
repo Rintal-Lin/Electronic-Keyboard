@@ -1,0 +1,2463 @@
+
+dianziqin.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000ec6  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000382  00800060  00000ec6  00000f5a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  008003e2  008003e2  000012dc  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  000012dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 000000f5  00000000  00000000  000012fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000465  00000000  00000000  000013f1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000109  00000000  00000000  00001856  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000756  00000000  00000000  0000195f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000080  00000000  00000000  000020b8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000115  00000000  00000000  00002138  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	13 e0       	ldi	r17, 0x03	; 3
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e6 ec       	ldi	r30, 0xC6	; 198
+  68:	fe e0       	ldi	r31, 0x0E	; 14
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a2 3e       	cpi	r26, 0xE2	; 226
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	13 e0       	ldi	r17, 0x03	; 3
+  78:	a2 ee       	ldi	r26, 0xE2	; 226
+  7a:	b3 e0       	ldi	r27, 0x03	; 3
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a6 3e       	cpi	r26, 0xE6	; 230
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 0f 02 	call	0x41e	; 0x41e <main>
+  8a:	0c 94 61 07 	jmp	0xec2	; 0xec2 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <write_com>:
+#define uint unsigned int
+
+const uchar table[]="My piano";
+
+void write_com(uchar com)
+{
+  92:	df 93       	push	r29
+  94:	cf 93       	push	r28
+  96:	0f 92       	push	r0
+  98:	cd b7       	in	r28, 0x3d	; 61
+  9a:	de b7       	in	r29, 0x3e	; 62
+  9c:	89 83       	std	Y+1, r24	; 0x01
+       PORTC&=~(1<<7);   //低电平指令模式。高电平数据；
+  9e:	a5 e3       	ldi	r26, 0x35	; 53
+  a0:	b0 e0       	ldi	r27, 0x00	; 0
+  a2:	e5 e3       	ldi	r30, 0x35	; 53
+  a4:	f0 e0       	ldi	r31, 0x00	; 0
+  a6:	80 81       	ld	r24, Z
+  a8:	8f 77       	andi	r24, 0x7F	; 127
+  aa:	8c 93       	st	X, r24
+	   PORTC&=~(1<<6);      //低电平写；
+  ac:	a5 e3       	ldi	r26, 0x35	; 53
+  ae:	b0 e0       	ldi	r27, 0x00	; 0
+  b0:	e5 e3       	ldi	r30, 0x35	; 53
+  b2:	f0 e0       	ldi	r31, 0x00	; 0
+  b4:	80 81       	ld	r24, Z
+  b6:	8f 7b       	andi	r24, 0xBF	; 191
+  b8:	8c 93       	st	X, r24
+	   PORTA=com;
+  ba:	eb e3       	ldi	r30, 0x3B	; 59
+  bc:	f0 e0       	ldi	r31, 0x00	; 0
+  be:	89 81       	ldd	r24, Y+1	; 0x01
+  c0:	80 83       	st	Z, r24
+	   PORTC|=(1<<1);             //高电平使能
+  c2:	a5 e3       	ldi	r26, 0x35	; 53
+  c4:	b0 e0       	ldi	r27, 0x00	; 0
+  c6:	e5 e3       	ldi	r30, 0x35	; 53
+  c8:	f0 e0       	ldi	r31, 0x00	; 0
+  ca:	80 81       	ld	r24, Z
+  cc:	82 60       	ori	r24, 0x02	; 2
+  ce:	8c 93       	st	X, r24
+	   delay(1);
+  d0:	81 e0       	ldi	r24, 0x01	; 1
+  d2:	90 e0       	ldi	r25, 0x00	; 0
+  d4:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+	   PORTC&=~(1<<1);        
+  d8:	a5 e3       	ldi	r26, 0x35	; 53
+  da:	b0 e0       	ldi	r27, 0x00	; 0
+  dc:	e5 e3       	ldi	r30, 0x35	; 53
+  de:	f0 e0       	ldi	r31, 0x00	; 0
+  e0:	80 81       	ld	r24, Z
+  e2:	8d 7f       	andi	r24, 0xFD	; 253
+  e4:	8c 93       	st	X, r24
+}
+  e6:	0f 90       	pop	r0
+  e8:	cf 91       	pop	r28
+  ea:	df 91       	pop	r29
+  ec:	08 95       	ret
+
+000000ee <write_dat>:
+
+void write_dat(uchar dat)
+{     
+  ee:	df 93       	push	r29
+  f0:	cf 93       	push	r28
+  f2:	0f 92       	push	r0
+  f4:	cd b7       	in	r28, 0x3d	; 61
+  f6:	de b7       	in	r29, 0x3e	; 62
+  f8:	89 83       	std	Y+1, r24	; 0x01
+       PORTC|=(1<<7);
+  fa:	a5 e3       	ldi	r26, 0x35	; 53
+  fc:	b0 e0       	ldi	r27, 0x00	; 0
+  fe:	e5 e3       	ldi	r30, 0x35	; 53
+ 100:	f0 e0       	ldi	r31, 0x00	; 0
+ 102:	80 81       	ld	r24, Z
+ 104:	80 68       	ori	r24, 0x80	; 128
+ 106:	8c 93       	st	X, r24
+	   PORTC&=~(1<<6);
+ 108:	a5 e3       	ldi	r26, 0x35	; 53
+ 10a:	b0 e0       	ldi	r27, 0x00	; 0
+ 10c:	e5 e3       	ldi	r30, 0x35	; 53
+ 10e:	f0 e0       	ldi	r31, 0x00	; 0
+ 110:	80 81       	ld	r24, Z
+ 112:	8f 7b       	andi	r24, 0xBF	; 191
+ 114:	8c 93       	st	X, r24
+	   PORTA=dat;
+ 116:	eb e3       	ldi	r30, 0x3B	; 59
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	89 81       	ldd	r24, Y+1	; 0x01
+ 11c:	80 83       	st	Z, r24
+	   PORTC|=(1<<1);
+ 11e:	a5 e3       	ldi	r26, 0x35	; 53
+ 120:	b0 e0       	ldi	r27, 0x00	; 0
+ 122:	e5 e3       	ldi	r30, 0x35	; 53
+ 124:	f0 e0       	ldi	r31, 0x00	; 0
+ 126:	80 81       	ld	r24, Z
+ 128:	82 60       	ori	r24, 0x02	; 2
+ 12a:	8c 93       	st	X, r24
+	   delay(1);
+ 12c:	81 e0       	ldi	r24, 0x01	; 1
+ 12e:	90 e0       	ldi	r25, 0x00	; 0
+ 130:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+	   PORTC&=~(1<<1);
+ 134:	a5 e3       	ldi	r26, 0x35	; 53
+ 136:	b0 e0       	ldi	r27, 0x00	; 0
+ 138:	e5 e3       	ldi	r30, 0x35	; 53
+ 13a:	f0 e0       	ldi	r31, 0x00	; 0
+ 13c:	80 81       	ld	r24, Z
+ 13e:	8d 7f       	andi	r24, 0xFD	; 253
+ 140:	8c 93       	st	X, r24
+
+}
+ 142:	0f 90       	pop	r0
+ 144:	cf 91       	pop	r28
+ 146:	df 91       	pop	r29
+ 148:	08 95       	ret
+
+0000014a <INI_POTR>:
+
+void INI_POTR(void)
+{
+ 14a:	df 93       	push	r29
+ 14c:	cf 93       	push	r28
+ 14e:	0f 92       	push	r0
+ 150:	cd b7       	in	r28, 0x3d	; 61
+ 152:	de b7       	in	r29, 0x3e	; 62
+	DDRC|=0xff;
+ 154:	e4 e3       	ldi	r30, 0x34	; 52
+ 156:	f0 e0       	ldi	r31, 0x00	; 0
+ 158:	80 81       	ld	r24, Z
+ 15a:	e4 e3       	ldi	r30, 0x34	; 52
+ 15c:	f0 e0       	ldi	r31, 0x00	; 0
+ 15e:	8f ef       	ldi	r24, 0xFF	; 255
+ 160:	80 83       	st	Z, r24
+	DDRA=0XFF;    
+ 162:	ea e3       	ldi	r30, 0x3A	; 58
+ 164:	f0 e0       	ldi	r31, 0x00	; 0
+ 166:	8f ef       	ldi	r24, 0xFF	; 255
+ 168:	80 83       	st	Z, r24
+	PORTC&=~(1<<7);
+ 16a:	a5 e3       	ldi	r26, 0x35	; 53
+ 16c:	b0 e0       	ldi	r27, 0x00	; 0
+ 16e:	e5 e3       	ldi	r30, 0x35	; 53
+ 170:	f0 e0       	ldi	r31, 0x00	; 0
+ 172:	80 81       	ld	r24, Z
+ 174:	8f 77       	andi	r24, 0x7F	; 127
+ 176:	8c 93       	st	X, r24
+}
+ 178:	0f 90       	pop	r0
+ 17a:	cf 91       	pop	r28
+ 17c:	df 91       	pop	r29
+ 17e:	08 95       	ret
+
+00000180 <isKeyPress>:
+
+//检测键盘是否被按下的函数
+unsigned char isKeyPress(void)	
+{
+ 180:	df 93       	push	r29
+ 182:	cf 93       	push	r28
+ 184:	0f 92       	push	r0
+ 186:	cd b7       	in	r28, 0x3d	; 61
+ 188:	de b7       	in	r29, 0x3e	; 62
+	DDRB=0xff;       //初始设置端口均为输出
+ 18a:	e7 e3       	ldi	r30, 0x37	; 55
+ 18c:	f0 e0       	ldi	r31, 0x00	; 0
+ 18e:	8f ef       	ldi	r24, 0xFF	; 255
+ 190:	80 83       	st	Z, r24
+	PORTB=0xf0;      //设置端口的初值为11110000
+ 192:	e8 e3       	ldi	r30, 0x38	; 56
+ 194:	f0 e0       	ldi	r31, 0x00	; 0
+ 196:	80 ef       	ldi	r24, 0xF0	; 240
+ 198:	80 83       	st	Z, r24
+	DDRB=0x0f;       //将高四位设为输入
+ 19a:	e7 e3       	ldi	r30, 0x37	; 55
+ 19c:	f0 e0       	ldi	r31, 0x00	; 0
+ 19e:	8f e0       	ldi	r24, 0x0F	; 15
+ 1a0:	80 83       	st	Z, r24
+
+	if(PINB==0xf0)   //当没有按下时，pinb仍然为11110000
+ 1a2:	e6 e3       	ldi	r30, 0x36	; 54
+ 1a4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a6:	80 81       	ld	r24, Z
+ 1a8:	80 3f       	cpi	r24, 0xF0	; 240
+ 1aa:	31 f4       	brne	.+12     	; 0x1b8 <isKeyPress+0x38>
+	{
+		DDRB=0xff;
+ 1ac:	e7 e3       	ldi	r30, 0x37	; 55
+ 1ae:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1b2:	80 83       	st	Z, r24
+		return 0;    //返回0，代表未按下
+ 1b4:	19 82       	std	Y+1, r1	; 0x01
+ 1b6:	06 c0       	rjmp	.+12     	; 0x1c4 <isKeyPress+0x44>
+	}
+	else             //当按下后，pinb不再是11110000
+	{
+		DDRB=0xff;
+ 1b8:	e7 e3       	ldi	r30, 0x37	; 55
+ 1ba:	f0 e0       	ldi	r31, 0x00	; 0
+ 1bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1be:	80 83       	st	Z, r24
+		return 1;    //返回1，代表按下了
+ 1c0:	81 e0       	ldi	r24, 0x01	; 1
+ 1c2:	89 83       	std	Y+1, r24	; 0x01
+ 1c4:	89 81       	ldd	r24, Y+1	; 0x01
+	}	
+
+}
+ 1c6:	0f 90       	pop	r0
+ 1c8:	cf 91       	pop	r28
+ 1ca:	df 91       	pop	r29
+ 1cc:	08 95       	ret
+
+000001ce <delay>:
+	
+	
+//延时函数，用来防止误按
+void delay(unsigned int x)
+{	
+ 1ce:	df 93       	push	r29
+ 1d0:	cf 93       	push	r28
+ 1d2:	00 d0       	rcall	.+0      	; 0x1d4 <delay+0x6>
+ 1d4:	00 d0       	rcall	.+0      	; 0x1d6 <delay+0x8>
+ 1d6:	cd b7       	in	r28, 0x3d	; 61
+ 1d8:	de b7       	in	r29, 0x3e	; 62
+ 1da:	9c 83       	std	Y+4, r25	; 0x04
+ 1dc:	8b 83       	std	Y+3, r24	; 0x03
+   TCNT0 = 55;          //设置TC寄存器的初值
+ 1de:	e2 e5       	ldi	r30, 0x52	; 82
+ 1e0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e2:	87 e3       	ldi	r24, 0x37	; 55
+ 1e4:	80 83       	st	Z, r24
+   TCCR0 |=(1<<CS01);   //设置8分频
+ 1e6:	a3 e5       	ldi	r26, 0x53	; 83
+ 1e8:	b0 e0       	ldi	r27, 0x00	; 0
+ 1ea:	e3 e5       	ldi	r30, 0x53	; 83
+ 1ec:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ee:	80 81       	ld	r24, Z
+ 1f0:	82 60       	ori	r24, 0x02	; 2
+ 1f2:	8c 93       	st	X, r24
+   for(int i=0;i<x*10;i++)         //i表示计时器得到的毫秒数，根据我们之前的实验，循环30次大约为1毫秒
+ 1f4:	1a 82       	std	Y+2, r1	; 0x02
+ 1f6:	19 82       	std	Y+1, r1	; 0x01
+ 1f8:	12 c0       	rjmp	.+36     	; 0x21e <delay+0x50>
+   {	  
+		while(!(TIFR & (1 << TOV0)));
+ 1fa:	e8 e5       	ldi	r30, 0x58	; 88
+ 1fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fe:	80 81       	ld	r24, Z
+ 200:	88 2f       	mov	r24, r24
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+ 204:	81 70       	andi	r24, 0x01	; 1
+ 206:	90 70       	andi	r25, 0x00	; 0
+ 208:	00 97       	sbiw	r24, 0x00	; 0
+ 20a:	b9 f3       	breq	.-18     	; 0x1fa <delay+0x2c>
+        TCNT0 = 55;
+ 20c:	e2 e5       	ldi	r30, 0x52	; 82
+ 20e:	f0 e0       	ldi	r31, 0x00	; 0
+ 210:	87 e3       	ldi	r24, 0x37	; 55
+ 212:	80 83       	st	Z, r24
+//延时函数，用来防止误按
+void delay(unsigned int x)
+{	
+   TCNT0 = 55;          //设置TC寄存器的初值
+   TCCR0 |=(1<<CS01);   //设置8分频
+   for(int i=0;i<x*10;i++)         //i表示计时器得到的毫秒数，根据我们之前的实验，循环30次大约为1毫秒
+ 214:	89 81       	ldd	r24, Y+1	; 0x01
+ 216:	9a 81       	ldd	r25, Y+2	; 0x02
+ 218:	01 96       	adiw	r24, 0x01	; 1
+ 21a:	9a 83       	std	Y+2, r25	; 0x02
+ 21c:	89 83       	std	Y+1, r24	; 0x01
+ 21e:	49 81       	ldd	r20, Y+1	; 0x01
+ 220:	5a 81       	ldd	r21, Y+2	; 0x02
+ 222:	8b 81       	ldd	r24, Y+3	; 0x03
+ 224:	9c 81       	ldd	r25, Y+4	; 0x04
+ 226:	9c 01       	movw	r18, r24
+ 228:	22 0f       	add	r18, r18
+ 22a:	33 1f       	adc	r19, r19
+ 22c:	c9 01       	movw	r24, r18
+ 22e:	88 0f       	add	r24, r24
+ 230:	99 1f       	adc	r25, r25
+ 232:	88 0f       	add	r24, r24
+ 234:	99 1f       	adc	r25, r25
+ 236:	82 0f       	add	r24, r18
+ 238:	93 1f       	adc	r25, r19
+ 23a:	48 17       	cp	r20, r24
+ 23c:	59 07       	cpc	r21, r25
+ 23e:	e8 f2       	brcs	.-70     	; 0x1fa <delay+0x2c>
+   {	  
+		while(!(TIFR & (1 << TOV0)));
+        TCNT0 = 55;
+   }//一个计时器周期
+}	
+ 240:	0f 90       	pop	r0
+ 242:	0f 90       	pop	r0
+ 244:	0f 90       	pop	r0
+ 246:	0f 90       	pop	r0
+ 248:	cf 91       	pop	r28
+ 24a:	df 91       	pop	r29
+ 24c:	08 95       	ret
+
+0000024e <keyPressed>:
+	
+//判断按下那个键的函数
+unsigned char keyPressed(void)
+{
+ 24e:	df 93       	push	r29
+ 250:	cf 93       	push	r28
+ 252:	00 d0       	rcall	.+0      	; 0x254 <keyPressed+0x6>
+ 254:	00 d0       	rcall	.+0      	; 0x256 <keyPressed+0x8>
+ 256:	0f 92       	push	r0
+ 258:	cd b7       	in	r28, 0x3d	; 61
+ 25a:	de b7       	in	r29, 0x3e	; 62
+ 	unsigned char i=0x7f,key,k; //初始均设为高电平
+ 25c:	8f e7       	ldi	r24, 0x7F	; 127
+ 25e:	8b 83       	std	Y+3, r24	; 0x03
+	delay(10);            //延迟10毫秒
+ 260:	8a e0       	ldi	r24, 0x0A	; 10
+ 262:	90 e0       	ldi	r25, 0x00	; 0
+ 264:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+	if(isKeyPress())     //判断是否按下
+ 268:	0e 94 c0 00 	call	0x180	; 0x180 <isKeyPress>
+ 26c:	88 23       	and	r24, r24
+ 26e:	09 f4       	brne	.+2      	; 0x272 <keyPressed+0x24>
+ 270:	cb c0       	rjmp	.+406    	; 0x408 <keyPressed+0x1ba>
+	{
+		while(1)
+		{
+			 PORTB=i;
+ 272:	e8 e3       	ldi	r30, 0x38	; 56
+ 274:	f0 e0       	ldi	r31, 0x00	; 0
+ 276:	8b 81       	ldd	r24, Y+3	; 0x03
+ 278:	80 83       	st	Z, r24
+	 		 DDRB=0xf0;
+ 27a:	e7 e3       	ldi	r30, 0x37	; 55
+ 27c:	f0 e0       	ldi	r31, 0x00	; 0
+ 27e:	80 ef       	ldi	r24, 0xF0	; 240
+ 280:	80 83       	st	Z, r24
+			 key=PINB;
+ 282:	e6 e3       	ldi	r30, 0x36	; 54
+ 284:	f0 e0       	ldi	r31, 0x00	; 0
+ 286:	80 81       	ld	r24, Z
+ 288:	8a 83       	std	Y+2, r24	; 0x02
+			 k=key&0x0f;
+ 28a:	8a 81       	ldd	r24, Y+2	; 0x02
+ 28c:	8f 70       	andi	r24, 0x0F	; 15
+ 28e:	89 83       	std	Y+1, r24	; 0x01
+			 if(k!=0x0f)
+ 290:	89 81       	ldd	r24, Y+1	; 0x01
+ 292:	8f 30       	cpi	r24, 0x0F	; 15
+ 294:	99 f4       	brne	.+38     	; 0x2bc <keyPressed+0x6e>
+			 {
+			 	break;
+			  }
+			 i=(i>>1|i<<7);
+ 296:	8b 81       	ldd	r24, Y+3	; 0x03
+ 298:	86 95       	lsr	r24
+ 29a:	28 2f       	mov	r18, r24
+ 29c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 29e:	88 2f       	mov	r24, r24
+ 2a0:	90 e0       	ldi	r25, 0x00	; 0
+ 2a2:	96 95       	lsr	r25
+ 2a4:	98 2f       	mov	r25, r24
+ 2a6:	88 27       	eor	r24, r24
+ 2a8:	97 95       	ror	r25
+ 2aa:	87 95       	ror	r24
+ 2ac:	82 2b       	or	r24, r18
+ 2ae:	8b 83       	std	Y+3, r24	; 0x03
+			 if(i==0b11110111)
+ 2b0:	8b 81       	ldd	r24, Y+3	; 0x03
+ 2b2:	87 3f       	cpi	r24, 0xF7	; 247
+ 2b4:	f1 f6       	brne	.-68     	; 0x272 <keyPressed+0x24>
+			 {
+			 	i=0x7f;
+ 2b6:	8f e7       	ldi	r24, 0x7F	; 127
+ 2b8:	8b 83       	std	Y+3, r24	; 0x03
+ 2ba:	db cf       	rjmp	.-74     	; 0x272 <keyPressed+0x24>
+             }
+	    }
+
+		switch(key)
+ 2bc:	8a 81       	ldd	r24, Y+2	; 0x02
+ 2be:	28 2f       	mov	r18, r24
+ 2c0:	30 e0       	ldi	r19, 0x00	; 0
+ 2c2:	3d 83       	std	Y+5, r19	; 0x05
+ 2c4:	2c 83       	std	Y+4, r18	; 0x04
+ 2c6:	8c 81       	ldd	r24, Y+4	; 0x04
+ 2c8:	9d 81       	ldd	r25, Y+5	; 0x05
+ 2ca:	8e 3b       	cpi	r24, 0xBE	; 190
+ 2cc:	91 05       	cpc	r25, r1
+ 2ce:	09 f4       	brne	.+2      	; 0x2d2 <keyPressed+0x84>
+ 2d0:	72 c0       	rjmp	.+228    	; 0x3b6 <keyPressed+0x168>
+ 2d2:	2c 81       	ldd	r18, Y+4	; 0x04
+ 2d4:	3d 81       	ldd	r19, Y+5	; 0x05
+ 2d6:	2f 3b       	cpi	r18, 0xBF	; 191
+ 2d8:	31 05       	cpc	r19, r1
+ 2da:	8c f5       	brge	.+98     	; 0x33e <keyPressed+0xf0>
+ 2dc:	8c 81       	ldd	r24, Y+4	; 0x04
+ 2de:	9d 81       	ldd	r25, Y+5	; 0x05
+ 2e0:	8e 37       	cpi	r24, 0x7E	; 126
+ 2e2:	91 05       	cpc	r25, r1
+ 2e4:	09 f4       	brne	.+2      	; 0x2e8 <keyPressed+0x9a>
+ 2e6:	6a c0       	rjmp	.+212    	; 0x3bc <keyPressed+0x16e>
+ 2e8:	2c 81       	ldd	r18, Y+4	; 0x04
+ 2ea:	3d 81       	ldd	r19, Y+5	; 0x05
+ 2ec:	2f 37       	cpi	r18, 0x7F	; 127
+ 2ee:	31 05       	cpc	r19, r1
+ 2f0:	9c f4       	brge	.+38     	; 0x318 <keyPressed+0xca>
+ 2f2:	8c 81       	ldd	r24, Y+4	; 0x04
+ 2f4:	9d 81       	ldd	r25, Y+5	; 0x05
+ 2f6:	8b 37       	cpi	r24, 0x7B	; 123
+ 2f8:	91 05       	cpc	r25, r1
+ 2fa:	09 f4       	brne	.+2      	; 0x2fe <keyPressed+0xb0>
+ 2fc:	76 c0       	rjmp	.+236    	; 0x3ea <keyPressed+0x19c>
+ 2fe:	2c 81       	ldd	r18, Y+4	; 0x04
+ 300:	3d 81       	ldd	r19, Y+5	; 0x05
+ 302:	2d 37       	cpi	r18, 0x7D	; 125
+ 304:	31 05       	cpc	r19, r1
+ 306:	09 f4       	brne	.+2      	; 0x30a <keyPressed+0xbc>
+ 308:	64 c0       	rjmp	.+200    	; 0x3d2 <keyPressed+0x184>
+ 30a:	8c 81       	ldd	r24, Y+4	; 0x04
+ 30c:	9d 81       	ldd	r25, Y+5	; 0x05
+ 30e:	87 37       	cpi	r24, 0x77	; 119
+ 310:	91 05       	cpc	r25, r1
+ 312:	09 f4       	brne	.+2      	; 0x316 <keyPressed+0xc8>
+ 314:	76 c0       	rjmp	.+236    	; 0x402 <keyPressed+0x1b4>
+ 316:	7a c0       	rjmp	.+244    	; 0x40c <keyPressed+0x1be>
+ 318:	2c 81       	ldd	r18, Y+4	; 0x04
+ 31a:	3d 81       	ldd	r19, Y+5	; 0x05
+ 31c:	2b 3b       	cpi	r18, 0xBB	; 187
+ 31e:	31 05       	cpc	r19, r1
+ 320:	09 f4       	brne	.+2      	; 0x324 <keyPressed+0xd6>
+ 322:	60 c0       	rjmp	.+192    	; 0x3e4 <keyPressed+0x196>
+ 324:	8c 81       	ldd	r24, Y+4	; 0x04
+ 326:	9d 81       	ldd	r25, Y+5	; 0x05
+ 328:	8d 3b       	cpi	r24, 0xBD	; 189
+ 32a:	91 05       	cpc	r25, r1
+ 32c:	09 f4       	brne	.+2      	; 0x330 <keyPressed+0xe2>
+ 32e:	4f c0       	rjmp	.+158    	; 0x3ce <keyPressed+0x180>
+ 330:	2c 81       	ldd	r18, Y+4	; 0x04
+ 332:	3d 81       	ldd	r19, Y+5	; 0x05
+ 334:	27 3b       	cpi	r18, 0xB7	; 183
+ 336:	31 05       	cpc	r19, r1
+ 338:	09 f4       	brne	.+2      	; 0x33c <keyPressed+0xee>
+ 33a:	60 c0       	rjmp	.+192    	; 0x3fc <keyPressed+0x1ae>
+ 33c:	67 c0       	rjmp	.+206    	; 0x40c <keyPressed+0x1be>
+ 33e:	8c 81       	ldd	r24, Y+4	; 0x04
+ 340:	9d 81       	ldd	r25, Y+5	; 0x05
+ 342:	8e 3d       	cpi	r24, 0xDE	; 222
+ 344:	91 05       	cpc	r25, r1
+ 346:	a1 f1       	breq	.+104    	; 0x3b0 <keyPressed+0x162>
+ 348:	2c 81       	ldd	r18, Y+4	; 0x04
+ 34a:	3d 81       	ldd	r19, Y+5	; 0x05
+ 34c:	2f 3d       	cpi	r18, 0xDF	; 223
+ 34e:	31 05       	cpc	r19, r1
+ 350:	94 f4       	brge	.+36     	; 0x376 <keyPressed+0x128>
+ 352:	8c 81       	ldd	r24, Y+4	; 0x04
+ 354:	9d 81       	ldd	r25, Y+5	; 0x05
+ 356:	8b 3d       	cpi	r24, 0xDB	; 219
+ 358:	91 05       	cpc	r25, r1
+ 35a:	09 f4       	brne	.+2      	; 0x35e <keyPressed+0x110>
+ 35c:	40 c0       	rjmp	.+128    	; 0x3de <keyPressed+0x190>
+ 35e:	2c 81       	ldd	r18, Y+4	; 0x04
+ 360:	3d 81       	ldd	r19, Y+5	; 0x05
+ 362:	2d 3d       	cpi	r18, 0xDD	; 221
+ 364:	31 05       	cpc	r19, r1
+ 366:	81 f1       	breq	.+96     	; 0x3c8 <keyPressed+0x17a>
+ 368:	8c 81       	ldd	r24, Y+4	; 0x04
+ 36a:	9d 81       	ldd	r25, Y+5	; 0x05
+ 36c:	87 3d       	cpi	r24, 0xD7	; 215
+ 36e:	91 05       	cpc	r25, r1
+ 370:	09 f4       	brne	.+2      	; 0x374 <keyPressed+0x126>
+ 372:	41 c0       	rjmp	.+130    	; 0x3f6 <keyPressed+0x1a8>
+ 374:	4b c0       	rjmp	.+150    	; 0x40c <keyPressed+0x1be>
+ 376:	2c 81       	ldd	r18, Y+4	; 0x04
+ 378:	3d 81       	ldd	r19, Y+5	; 0x05
+ 37a:	2b 3e       	cpi	r18, 0xEB	; 235
+ 37c:	31 05       	cpc	r19, r1
+ 37e:	61 f1       	breq	.+88     	; 0x3d8 <keyPressed+0x18a>
+ 380:	8c 81       	ldd	r24, Y+4	; 0x04
+ 382:	9d 81       	ldd	r25, Y+5	; 0x05
+ 384:	8c 3e       	cpi	r24, 0xEC	; 236
+ 386:	91 05       	cpc	r25, r1
+ 388:	34 f4       	brge	.+12     	; 0x396 <keyPressed+0x148>
+ 38a:	2c 81       	ldd	r18, Y+4	; 0x04
+ 38c:	3d 81       	ldd	r19, Y+5	; 0x05
+ 38e:	27 3e       	cpi	r18, 0xE7	; 231
+ 390:	31 05       	cpc	r19, r1
+ 392:	71 f1       	breq	.+92     	; 0x3f0 <keyPressed+0x1a2>
+ 394:	3b c0       	rjmp	.+118    	; 0x40c <keyPressed+0x1be>
+ 396:	8c 81       	ldd	r24, Y+4	; 0x04
+ 398:	9d 81       	ldd	r25, Y+5	; 0x05
+ 39a:	8d 3e       	cpi	r24, 0xED	; 237
+ 39c:	91 05       	cpc	r25, r1
+ 39e:	89 f0       	breq	.+34     	; 0x3c2 <keyPressed+0x174>
+ 3a0:	2c 81       	ldd	r18, Y+4	; 0x04
+ 3a2:	3d 81       	ldd	r19, Y+5	; 0x05
+ 3a4:	2e 3e       	cpi	r18, 0xEE	; 238
+ 3a6:	31 05       	cpc	r19, r1
+ 3a8:	89 f5       	brne	.+98     	; 0x40c <keyPressed+0x1be>
+		{
+			case 0b11101110:
+			key=1;
+ 3aa:	81 e0       	ldi	r24, 0x01	; 1
+ 3ac:	8a 83       	std	Y+2, r24	; 0x02
+ 3ae:	2e c0       	rjmp	.+92     	; 0x40c <keyPressed+0x1be>
+			break;
+            case 0b11011110:
+			key=5;
+ 3b0:	85 e0       	ldi	r24, 0x05	; 5
+ 3b2:	8a 83       	std	Y+2, r24	; 0x02
+ 3b4:	2b c0       	rjmp	.+86     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b10111110:
+			key=9;
+ 3b6:	89 e0       	ldi	r24, 0x09	; 9
+ 3b8:	8a 83       	std	Y+2, r24	; 0x02
+ 3ba:	28 c0       	rjmp	.+80     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b01111110:
+			key=12;
+ 3bc:	8c e0       	ldi	r24, 0x0C	; 12
+ 3be:	8a 83       	std	Y+2, r24	; 0x02
+ 3c0:	25 c0       	rjmp	.+74     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11101101:
+			key=2;
+ 3c2:	82 e0       	ldi	r24, 0x02	; 2
+ 3c4:	8a 83       	std	Y+2, r24	; 0x02
+ 3c6:	22 c0       	rjmp	.+68     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11011101:
+			key=6;
+ 3c8:	86 e0       	ldi	r24, 0x06	; 6
+ 3ca:	8a 83       	std	Y+2, r24	; 0x02
+ 3cc:	1f c0       	rjmp	.+62     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b10111101:
+			key=0;
+ 3ce:	1a 82       	std	Y+2, r1	; 0x02
+ 3d0:	1d c0       	rjmp	.+58     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b01111101:
+			key=13;
+ 3d2:	8d e0       	ldi	r24, 0x0D	; 13
+ 3d4:	8a 83       	std	Y+2, r24	; 0x02
+ 3d6:	1a c0       	rjmp	.+52     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11101011:
+			key=3;
+ 3d8:	83 e0       	ldi	r24, 0x03	; 3
+ 3da:	8a 83       	std	Y+2, r24	; 0x02
+ 3dc:	17 c0       	rjmp	.+46     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11011011:
+			key=7;
+ 3de:	87 e0       	ldi	r24, 0x07	; 7
+ 3e0:	8a 83       	std	Y+2, r24	; 0x02
+ 3e2:	14 c0       	rjmp	.+40     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b10111011:
+			key=10;
+ 3e4:	8a e0       	ldi	r24, 0x0A	; 10
+ 3e6:	8a 83       	std	Y+2, r24	; 0x02
+ 3e8:	11 c0       	rjmp	.+34     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b01111011:
+			key=14;
+ 3ea:	8e e0       	ldi	r24, 0x0E	; 14
+ 3ec:	8a 83       	std	Y+2, r24	; 0x02
+ 3ee:	0e c0       	rjmp	.+28     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11100111:
+			key=4;
+ 3f0:	84 e0       	ldi	r24, 0x04	; 4
+ 3f2:	8a 83       	std	Y+2, r24	; 0x02
+ 3f4:	0b c0       	rjmp	.+22     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b11010111:
+			key=8;
+ 3f6:	88 e0       	ldi	r24, 0x08	; 8
+ 3f8:	8a 83       	std	Y+2, r24	; 0x02
+ 3fa:	08 c0       	rjmp	.+16     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b10110111:
+			key=11;
+ 3fc:	8b e0       	ldi	r24, 0x0B	; 11
+ 3fe:	8a 83       	std	Y+2, r24	; 0x02
+ 400:	05 c0       	rjmp	.+10     	; 0x40c <keyPressed+0x1be>
+			break;
+			case 0b01110111:
+			key=15;
+ 402:	8f e0       	ldi	r24, 0x0F	; 15
+ 404:	8a 83       	std	Y+2, r24	; 0x02
+ 406:	02 c0       	rjmp	.+4      	; 0x40c <keyPressed+0x1be>
+			break;
+		}		       
+	}
+	else
+	{
+		key=16;
+ 408:	80 e1       	ldi	r24, 0x10	; 16
+ 40a:	8a 83       	std	Y+2, r24	; 0x02
+	}
+	return key;
+ 40c:	8a 81       	ldd	r24, Y+2	; 0x02
+}
+ 40e:	0f 90       	pop	r0
+ 410:	0f 90       	pop	r0
+ 412:	0f 90       	pop	r0
+ 414:	0f 90       	pop	r0
+ 416:	0f 90       	pop	r0
+ 418:	cf 91       	pop	r28
+ 41a:	df 91       	pop	r29
+ 41c:	08 95       	ret
+
+0000041e <main>:
+ {660,500},{524,1000},{0,1000},{524,1000},{494,500},{440,500},{440,500},
+ {494,1000},{392,1000},{0,0}
+ };
+
+void main(void)
+{
+ 41e:	0f 93       	push	r16
+ 420:	1f 93       	push	r17
+ 422:	df 93       	push	r29
+ 424:	cf 93       	push	r28
+ 426:	cd b7       	in	r28, 0x3d	; 61
+ 428:	de b7       	in	r29, 0x3e	; 62
+ 42a:	a3 97       	sbiw	r28, 0x23	; 35
+ 42c:	0f b6       	in	r0, 0x3f	; 63
+ 42e:	f8 94       	cli
+ 430:	de bf       	out	0x3e, r29	; 62
+ 432:	0f be       	out	0x3f, r0	; 63
+ 434:	cd bf       	out	0x3d, r28	; 61
+	INI_POTR();	           //必须启动！
+ 436:	0e 94 a5 00 	call	0x14a	; 0x14a <INI_POTR>
+	write_com(0X38);      //显示光标等；
+ 43a:	88 e3       	ldi	r24, 0x38	; 56
+ 43c:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	write_com(0X01);        //清屏；
+ 440:	81 e0       	ldi	r24, 0x01	; 1
+ 442:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	write_com(0X0f);         //打开光标；
+ 446:	8f e0       	ldi	r24, 0x0F	; 15
+ 448:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	write_com(0X06);
+ 44c:	86 e0       	ldi	r24, 0x06	; 6
+ 44e:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	write_com(0X80+0X02); 
+ 452:	82 e8       	ldi	r24, 0x82	; 130
+ 454:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	for(char i=0;i<8;i++)
+ 458:	1d 8a       	std	Y+21, r1	; 0x15
+ 45a:	0c c0       	rjmp	.+24     	; 0x474 <__stack+0x15>
+	  {
+		write_dat(table[i]);		
+ 45c:	8d 89       	ldd	r24, Y+21	; 0x15
+ 45e:	88 2f       	mov	r24, r24
+ 460:	90 e0       	ldi	r25, 0x00	; 0
+ 462:	fc 01       	movw	r30, r24
+ 464:	e0 5a       	subi	r30, 0xA0	; 160
+ 466:	ff 4f       	sbci	r31, 0xFF	; 255
+ 468:	80 81       	ld	r24, Z
+ 46a:	0e 94 77 00 	call	0xee	; 0xee <write_dat>
+	write_com(0X38);      //显示光标等；
+	write_com(0X01);        //清屏；
+	write_com(0X0f);         //打开光标；
+	write_com(0X06);
+	write_com(0X80+0X02); 
+	for(char i=0;i<8;i++)
+ 46e:	8d 89       	ldd	r24, Y+21	; 0x15
+ 470:	8f 5f       	subi	r24, 0xFF	; 255
+ 472:	8d 8b       	std	Y+21, r24	; 0x15
+ 474:	8d 89       	ldd	r24, Y+21	; 0x15
+ 476:	88 30       	cpi	r24, 0x08	; 8
+ 478:	88 f3       	brcs	.-30     	; 0x45c <main+0x3e>
+	  {
+		write_dat(table[i]);		
+	  }
+	write_com(0X80+0X11);
+ 47a:	81 e9       	ldi	r24, 0x91	; 145
+ 47c:	0e 94 49 00 	call	0x92	; 0x92 <write_com>
+	delay(5);
+ 480:	85 e0       	ldi	r24, 0x05	; 5
+ 482:	90 e0       	ldi	r25, 0x00	; 0
+ 484:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+
+    int k=0;//获取键值
+ 488:	1b a2       	std	Y+35, r1	; 0x23
+ 48a:	1a a2       	std	Y+34, r1	; 0x22
+    int last=0;
+ 48c:	19 a2       	std	Y+33, r1	; 0x21
+ 48e:	18 a2       	std	Y+32, r1	; 0x20
+	int next=0;
+ 490:	1f 8e       	std	Y+31, r1	; 0x1f
+ 492:	1e 8e       	std	Y+30, r1	; 0x1e
+	int j=0;//初始设置为不录音的模式
+ 494:	1d 8e       	std	Y+29, r1	; 0x1d
+ 496:	1c 8e       	std	Y+28, r1	; 0x1c
+	int m1=0;//录入音符数
+ 498:	1b 8e       	std	Y+27, r1	; 0x1b
+ 49a:	1a 8e       	std	Y+26, r1	; 0x1a
+    int m2=0;//录入音长
+ 49c:	19 8e       	std	Y+25, r1	; 0x19
+ 49e:	18 8e       	std	Y+24, r1	; 0x18
+    int m3=0;//间隔
+ 4a0:	1f 8a       	std	Y+23, r1	; 0x17
+ 4a2:	1e 8a       	std	Y+22, r1	; 0x16
+	while(1)
+	{
+		if(j)
+ 4a4:	8c 8d       	ldd	r24, Y+28	; 0x1c
+ 4a6:	9d 8d       	ldd	r25, Y+29	; 0x1d
+ 4a8:	00 97       	sbiw	r24, 0x00	; 0
+ 4aa:	29 f0       	breq	.+10     	; 0x4b6 <__stack+0x57>
+		{m3++;}
+ 4ac:	8e 89       	ldd	r24, Y+22	; 0x16
+ 4ae:	9f 89       	ldd	r25, Y+23	; 0x17
+ 4b0:	01 96       	adiw	r24, 0x01	; 1
+ 4b2:	9f 8b       	std	Y+23, r25	; 0x17
+ 4b4:	8e 8b       	std	Y+22, r24	; 0x16
+		if(isKeyPress())
+ 4b6:	0e 94 c0 00 	call	0x180	; 0x180 <isKeyPress>
+ 4ba:	88 23       	and	r24, r24
+ 4bc:	99 f3       	breq	.-26     	; 0x4a4 <__stack+0x45>
+		{
+			k=keyPressed();//获取按下的键值
+ 4be:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 4c2:	88 2f       	mov	r24, r24
+ 4c4:	90 e0       	ldi	r25, 0x00	; 0
+ 4c6:	9b a3       	std	Y+35, r25	; 0x23
+ 4c8:	8a a3       	std	Y+34, r24	; 0x22
+
+			if(k==8)  //按下8变为低音
+ 4ca:	8a a1       	ldd	r24, Y+34	; 0x22
+ 4cc:	9b a1       	ldd	r25, Y+35	; 0x23
+ 4ce:	88 30       	cpi	r24, 0x08	; 8
+ 4d0:	91 05       	cpc	r25, r1
+ 4d2:	09 f5       	brne	.+66     	; 0x516 <__stack+0xb7>
+            {
+				//n2=16;显示音阶
+				for(int i=0;i<7;i++) //播放低音的七个音
+ 4d4:	1c 8a       	std	Y+20, r1	; 0x14
+ 4d6:	1b 8a       	std	Y+19, r1	; 0x13
+ 4d8:	18 c0       	rjmp	.+48     	; 0x50a <__stack+0xab>
+				{
+					music[i]=music_l[i];
+ 4da:	4b 89       	ldd	r20, Y+19	; 0x13
+ 4dc:	5c 89       	ldd	r21, Y+20	; 0x14
+ 4de:	8b 89       	ldd	r24, Y+19	; 0x13
+ 4e0:	9c 89       	ldd	r25, Y+20	; 0x14
+ 4e2:	88 0f       	add	r24, r24
+ 4e4:	99 1f       	adc	r25, r25
+ 4e6:	fc 01       	movw	r30, r24
+ 4e8:	e7 59       	subi	r30, 0x97	; 151
+ 4ea:	ff 4f       	sbci	r31, 0xFF	; 255
+ 4ec:	20 81       	ld	r18, Z
+ 4ee:	31 81       	ldd	r19, Z+1	; 0x01
+ 4f0:	ca 01       	movw	r24, r20
+ 4f2:	88 0f       	add	r24, r24
+ 4f4:	99 1f       	adc	r25, r25
+ 4f6:	fc 01       	movw	r30, r24
+ 4f8:	ed 56       	subi	r30, 0x6D	; 109
+ 4fa:	ff 4f       	sbci	r31, 0xFF	; 255
+ 4fc:	31 83       	std	Z+1, r19	; 0x01
+ 4fe:	20 83       	st	Z, r18
+			k=keyPressed();//获取按下的键值
+
+			if(k==8)  //按下8变为低音
+            {
+				//n2=16;显示音阶
+				for(int i=0;i<7;i++) //播放低音的七个音
+ 500:	8b 89       	ldd	r24, Y+19	; 0x13
+ 502:	9c 89       	ldd	r25, Y+20	; 0x14
+ 504:	01 96       	adiw	r24, 0x01	; 1
+ 506:	9c 8b       	std	Y+20, r25	; 0x14
+ 508:	8b 8b       	std	Y+19, r24	; 0x13
+ 50a:	8b 89       	ldd	r24, Y+19	; 0x13
+ 50c:	9c 89       	ldd	r25, Y+20	; 0x14
+ 50e:	87 30       	cpi	r24, 0x07	; 7
+ 510:	91 05       	cpc	r25, r1
+ 512:	1c f3       	brlt	.-58     	; 0x4da <__stack+0x7b>
+ 514:	c7 cf       	rjmp	.-114    	; 0x4a4 <__stack+0x45>
+				{
+					music[i]=music_l[i];
+				}
+			}
+
+            else if(k==9)  //按下9变为中音
+ 516:	8a a1       	ldd	r24, Y+34	; 0x22
+ 518:	9b a1       	ldd	r25, Y+35	; 0x23
+ 51a:	89 30       	cpi	r24, 0x09	; 9
+ 51c:	91 05       	cpc	r25, r1
+ 51e:	09 f5       	brne	.+66     	; 0x562 <__stack+0x103>
+            {
+				//n2=12;显示音阶
+				for(int i=0;i<7;i++) //播放中音的七个音
+ 520:	1a 8a       	std	Y+18, r1	; 0x12
+ 522:	19 8a       	std	Y+17, r1	; 0x11
+ 524:	18 c0       	rjmp	.+48     	; 0x556 <__stack+0xf7>
+				{
+					music[i]=music_c[i];
+ 526:	49 89       	ldd	r20, Y+17	; 0x11
+ 528:	5a 89       	ldd	r21, Y+18	; 0x12
+ 52a:	89 89       	ldd	r24, Y+17	; 0x11
+ 52c:	9a 89       	ldd	r25, Y+18	; 0x12
+ 52e:	88 0f       	add	r24, r24
+ 530:	99 1f       	adc	r25, r25
+ 532:	fc 01       	movw	r30, r24
+ 534:	eb 57       	subi	r30, 0x7B	; 123
+ 536:	ff 4f       	sbci	r31, 0xFF	; 255
+ 538:	20 81       	ld	r18, Z
+ 53a:	31 81       	ldd	r19, Z+1	; 0x01
+ 53c:	ca 01       	movw	r24, r20
+ 53e:	88 0f       	add	r24, r24
+ 540:	99 1f       	adc	r25, r25
+ 542:	fc 01       	movw	r30, r24
+ 544:	ed 56       	subi	r30, 0x6D	; 109
+ 546:	ff 4f       	sbci	r31, 0xFF	; 255
+ 548:	31 83       	std	Z+1, r19	; 0x01
+ 54a:	20 83       	st	Z, r18
+			}
+
+            else if(k==9)  //按下9变为中音
+            {
+				//n2=12;显示音阶
+				for(int i=0;i<7;i++) //播放中音的七个音
+ 54c:	89 89       	ldd	r24, Y+17	; 0x11
+ 54e:	9a 89       	ldd	r25, Y+18	; 0x12
+ 550:	01 96       	adiw	r24, 0x01	; 1
+ 552:	9a 8b       	std	Y+18, r25	; 0x12
+ 554:	89 8b       	std	Y+17, r24	; 0x11
+ 556:	89 89       	ldd	r24, Y+17	; 0x11
+ 558:	9a 89       	ldd	r25, Y+18	; 0x12
+ 55a:	87 30       	cpi	r24, 0x07	; 7
+ 55c:	91 05       	cpc	r25, r1
+ 55e:	1c f3       	brlt	.-58     	; 0x526 <__stack+0xc7>
+ 560:	a1 cf       	rjmp	.-190    	; 0x4a4 <__stack+0x45>
+				{
+					music[i]=music_c[i];
+				}
+			}
+
+			else if(k==0) //按下0变为高音
+ 562:	8a a1       	ldd	r24, Y+34	; 0x22
+ 564:	9b a1       	ldd	r25, Y+35	; 0x23
+ 566:	00 97       	sbiw	r24, 0x00	; 0
+ 568:	09 f5       	brne	.+66     	; 0x5ac <__stack+0x14d>
+            {
+				//n2=17;显示音阶
+				for(int i=0;i<7;i++) //播放高音的七个音
+ 56a:	18 8a       	std	Y+16, r1	; 0x10
+ 56c:	1f 86       	std	Y+15, r1	; 0x0f
+ 56e:	18 c0       	rjmp	.+48     	; 0x5a0 <__stack+0x141>
+				{
+					music[i]=music_h[i];
+ 570:	4f 85       	ldd	r20, Y+15	; 0x0f
+ 572:	58 89       	ldd	r21, Y+16	; 0x10
+ 574:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 576:	98 89       	ldd	r25, Y+16	; 0x10
+ 578:	88 0f       	add	r24, r24
+ 57a:	99 1f       	adc	r25, r25
+ 57c:	fc 01       	movw	r30, r24
+ 57e:	e9 58       	subi	r30, 0x89	; 137
+ 580:	ff 4f       	sbci	r31, 0xFF	; 255
+ 582:	20 81       	ld	r18, Z
+ 584:	31 81       	ldd	r19, Z+1	; 0x01
+ 586:	ca 01       	movw	r24, r20
+ 588:	88 0f       	add	r24, r24
+ 58a:	99 1f       	adc	r25, r25
+ 58c:	fc 01       	movw	r30, r24
+ 58e:	ed 56       	subi	r30, 0x6D	; 109
+ 590:	ff 4f       	sbci	r31, 0xFF	; 255
+ 592:	31 83       	std	Z+1, r19	; 0x01
+ 594:	20 83       	st	Z, r18
+			}
+
+			else if(k==0) //按下0变为高音
+            {
+				//n2=17;显示音阶
+				for(int i=0;i<7;i++) //播放高音的七个音
+ 596:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 598:	98 89       	ldd	r25, Y+16	; 0x10
+ 59a:	01 96       	adiw	r24, 0x01	; 1
+ 59c:	98 8b       	std	Y+16, r25	; 0x10
+ 59e:	8f 87       	std	Y+15, r24	; 0x0f
+ 5a0:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 5a2:	98 89       	ldd	r25, Y+16	; 0x10
+ 5a4:	87 30       	cpi	r24, 0x07	; 7
+ 5a6:	91 05       	cpc	r25, r1
+ 5a8:	1c f3       	brlt	.-58     	; 0x570 <__stack+0x111>
+ 5aa:	7c cf       	rjmp	.-264    	; 0x4a4 <__stack+0x45>
+				{
+					music[i]=music_h[i];
+				}
+			}
+			else if(k==10) //按B播放示范音乐
+ 5ac:	8a a1       	ldd	r24, Y+34	; 0x22
+ 5ae:	9b a1       	ldd	r25, Y+35	; 0x23
+ 5b0:	8a 30       	cpi	r24, 0x0A	; 10
+ 5b2:	91 05       	cpc	r25, r1
+ 5b4:	09 f0       	breq	.+2      	; 0x5b8 <__stack+0x159>
+ 5b6:	cc c2       	rjmp	.+1432   	; 0xb50 <__stack+0x6f1>
+			{  
+			    while(1)
+			   {
+			  	k=keyPressed();//获取按下的键值
+ 5b8:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 5bc:	88 2f       	mov	r24, r24
+ 5be:	90 e0       	ldi	r25, 0x00	; 0
+ 5c0:	9b a3       	std	Y+35, r25	; 0x23
+ 5c2:	8a a3       	std	Y+34, r24	; 0x22
+				if(k==1||last==1||next==1)
+ 5c4:	8a a1       	ldd	r24, Y+34	; 0x22
+ 5c6:	9b a1       	ldd	r25, Y+35	; 0x23
+ 5c8:	81 30       	cpi	r24, 0x01	; 1
+ 5ca:	91 05       	cpc	r25, r1
+ 5cc:	59 f0       	breq	.+22     	; 0x5e4 <__stack+0x185>
+ 5ce:	88 a1       	ldd	r24, Y+32	; 0x20
+ 5d0:	99 a1       	ldd	r25, Y+33	; 0x21
+ 5d2:	81 30       	cpi	r24, 0x01	; 1
+ 5d4:	91 05       	cpc	r25, r1
+ 5d6:	31 f0       	breq	.+12     	; 0x5e4 <__stack+0x185>
+ 5d8:	8e 8d       	ldd	r24, Y+30	; 0x1e
+ 5da:	9f 8d       	ldd	r25, Y+31	; 0x1f
+ 5dc:	81 30       	cpi	r24, 0x01	; 1
+ 5de:	91 05       	cpc	r25, r1
+ 5e0:	09 f0       	breq	.+2      	; 0x5e4 <__stack+0x185>
+ 5e2:	7e c0       	rjmp	.+252    	; 0x6e0 <__stack+0x281>
+				{
+				    for( int i=0;i<21;i++)
+ 5e4:	1e 86       	std	Y+14, r1	; 0x0e
+ 5e6:	1d 86       	std	Y+13, r1	; 0x0d
+ 5e8:	6d c0       	rjmp	.+218    	; 0x6c4 <__stack+0x265>
+					{
+						k=keyPressed();
+ 5ea:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 5ee:	88 2f       	mov	r24, r24
+ 5f0:	90 e0       	ldi	r25, 0x00	; 0
+ 5f2:	9b a3       	std	Y+35, r25	; 0x23
+ 5f4:	8a a3       	std	Y+34, r24	; 0x22
+						if(k==12)
+ 5f6:	8a a1       	ldd	r24, Y+34	; 0x22
+ 5f8:	9b a1       	ldd	r25, Y+35	; 0x23
+ 5fa:	8c 30       	cpi	r24, 0x0C	; 12
+ 5fc:	91 05       	cpc	r25, r1
+ 5fe:	09 f4       	brne	.+2      	; 0x602 <__stack+0x1a3>
+ 600:	67 c0       	rjmp	.+206    	; 0x6d0 <__stack+0x271>
+						{break;}
+                        else if(k==11)
+ 602:	8a a1       	ldd	r24, Y+34	; 0x22
+ 604:	9b a1       	ldd	r25, Y+35	; 0x23
+ 606:	8b 30       	cpi	r24, 0x0B	; 11
+ 608:	91 05       	cpc	r25, r1
+ 60a:	09 f4       	brne	.+2      	; 0x60e <__stack+0x1af>
+ 60c:	61 c0       	rjmp	.+194    	; 0x6d0 <__stack+0x271>
+						{break;last=k-1;}
+						else if(k==13)
+ 60e:	8a a1       	ldd	r24, Y+34	; 0x22
+ 610:	9b a1       	ldd	r25, Y+35	; 0x23
+ 612:	8d 30       	cpi	r24, 0x0D	; 13
+ 614:	91 05       	cpc	r25, r1
+ 616:	09 f4       	brne	.+2      	; 0x61a <__stack+0x1bb>
+ 618:	5b c0       	rjmp	.+182    	; 0x6d0 <__stack+0x271>
+						{break;next=k+1;}
+						else if(shiyin[i][0]!=0)
+ 61a:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 61c:	9e 85       	ldd	r25, Y+14	; 0x0e
+ 61e:	88 0f       	add	r24, r24
+ 620:	99 1f       	adc	r25, r25
+ 622:	88 0f       	add	r24, r24
+ 624:	99 1f       	adc	r25, r25
+ 626:	fc 01       	movw	r30, r24
+ 628:	ef 55       	subi	r30, 0x5F	; 95
+ 62a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 62c:	80 81       	ld	r24, Z
+ 62e:	91 81       	ldd	r25, Z+1	; 0x01
+ 630:	00 97       	sbiw	r24, 0x00	; 0
+ 632:	71 f1       	breq	.+92     	; 0x690 <__stack+0x231>
+						{
+							DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ 634:	a1 e3       	ldi	r26, 0x31	; 49
+ 636:	b0 e0       	ldi	r27, 0x00	; 0
+ 638:	e1 e3       	ldi	r30, 0x31	; 49
+ 63a:	f0 e0       	ldi	r31, 0x00	; 0
+ 63c:	80 81       	ld	r24, Z
+ 63e:	80 63       	ori	r24, 0x30	; 48
+ 640:	8c 93       	st	X, r24
+							TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ 642:	ef e4       	ldi	r30, 0x4F	; 79
+ 644:	f0 e0       	ldi	r31, 0x00	; 0
+ 646:	80 e5       	ldi	r24, 0x50	; 80
+ 648:	80 83       	st	Z, r24
+						    TCCR1B=0x09;
+ 64a:	ee e4       	ldi	r30, 0x4E	; 78
+ 64c:	f0 e0       	ldi	r31, 0x00	; 0
+ 64e:	89 e0       	ldi	r24, 0x09	; 9
+ 650:	80 83       	st	Z, r24
+							OCR1A=(500000/shiyin[i][0]-1); //设置使得输出频率
+ 652:	0a e4       	ldi	r16, 0x4A	; 74
+ 654:	10 e0       	ldi	r17, 0x00	; 0
+ 656:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 658:	9e 85       	ldd	r25, Y+14	; 0x0e
+ 65a:	88 0f       	add	r24, r24
+ 65c:	99 1f       	adc	r25, r25
+ 65e:	88 0f       	add	r24, r24
+ 660:	99 1f       	adc	r25, r25
+ 662:	fc 01       	movw	r30, r24
+ 664:	ef 55       	subi	r30, 0x5F	; 95
+ 666:	ff 4f       	sbci	r31, 0xFF	; 255
+ 668:	80 81       	ld	r24, Z
+ 66a:	91 81       	ldd	r25, Z+1	; 0x01
+ 66c:	9c 01       	movw	r18, r24
+ 66e:	40 e0       	ldi	r20, 0x00	; 0
+ 670:	50 e0       	ldi	r21, 0x00	; 0
+ 672:	80 e2       	ldi	r24, 0x20	; 32
+ 674:	91 ea       	ldi	r25, 0xA1	; 161
+ 676:	a7 e0       	ldi	r26, 0x07	; 7
+ 678:	b0 e0       	ldi	r27, 0x00	; 0
+ 67a:	bc 01       	movw	r22, r24
+ 67c:	cd 01       	movw	r24, r26
+ 67e:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ 682:	da 01       	movw	r26, r20
+ 684:	c9 01       	movw	r24, r18
+ 686:	01 97       	sbiw	r24, 0x01	; 1
+ 688:	f8 01       	movw	r30, r16
+ 68a:	91 83       	std	Z+1, r25	; 0x01
+ 68c:	80 83       	st	Z, r24
+ 68e:	07 c0       	rjmp	.+14     	; 0x69e <__stack+0x23f>
+
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ 690:	a1 e3       	ldi	r26, 0x31	; 49
+ 692:	b0 e0       	ldi	r27, 0x00	; 0
+ 694:	e1 e3       	ldi	r30, 0x31	; 49
+ 696:	f0 e0       	ldi	r31, 0x00	; 0
+ 698:	80 81       	ld	r24, Z
+ 69a:	8f 7c       	andi	r24, 0xCF	; 207
+ 69c:	8c 93       	st	X, r24
+						}
+						delay(shiyin[i][1]);//延时音长
+ 69e:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 6a0:	9e 85       	ldd	r25, Y+14	; 0x0e
+ 6a2:	88 0f       	add	r24, r24
+ 6a4:	99 1f       	adc	r25, r25
+ 6a6:	01 96       	adiw	r24, 0x01	; 1
+ 6a8:	88 0f       	add	r24, r24
+ 6aa:	99 1f       	adc	r25, r25
+ 6ac:	fc 01       	movw	r30, r24
+ 6ae:	ef 55       	subi	r30, 0x5F	; 95
+ 6b0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6b2:	80 81       	ld	r24, Z
+ 6b4:	91 81       	ldd	r25, Z+1	; 0x01
+ 6b6:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+			    while(1)
+			   {
+			  	k=keyPressed();//获取按下的键值
+				if(k==1||last==1||next==1)
+				{
+				    for( int i=0;i<21;i++)
+ 6ba:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 6bc:	9e 85       	ldd	r25, Y+14	; 0x0e
+ 6be:	01 96       	adiw	r24, 0x01	; 1
+ 6c0:	9e 87       	std	Y+14, r25	; 0x0e
+ 6c2:	8d 87       	std	Y+13, r24	; 0x0d
+ 6c4:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 6c6:	9e 85       	ldd	r25, Y+14	; 0x0e
+ 6c8:	85 31       	cpi	r24, 0x15	; 21
+ 6ca:	91 05       	cpc	r25, r1
+ 6cc:	0c f4       	brge	.+2      	; 0x6d0 <__stack+0x271>
+ 6ce:	8d cf       	rjmp	.-230    	; 0x5ea <__stack+0x18b>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(shiyin[i][1]);//延时音长
+					}
+					DDRD &= ~0x30;	
+ 6d0:	a1 e3       	ldi	r26, 0x31	; 49
+ 6d2:	b0 e0       	ldi	r27, 0x00	; 0
+ 6d4:	e1 e3       	ldi	r30, 0x31	; 49
+ 6d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 6d8:	80 81       	ld	r24, Z
+ 6da:	8f 7c       	andi	r24, 0xCF	; 207
+ 6dc:	8c 93       	st	X, r24
+ 6de:	e2 ce       	rjmp	.-572    	; 0x4a4 <__stack+0x45>
+					break;	
+				}
+				else if(k==2||last==2||next==2)//按1播放世上只有妈妈好
+ 6e0:	8a a1       	ldd	r24, Y+34	; 0x22
+ 6e2:	9b a1       	ldd	r25, Y+35	; 0x23
+ 6e4:	82 30       	cpi	r24, 0x02	; 2
+ 6e6:	91 05       	cpc	r25, r1
+ 6e8:	59 f0       	breq	.+22     	; 0x700 <__stack+0x2a1>
+ 6ea:	88 a1       	ldd	r24, Y+32	; 0x20
+ 6ec:	99 a1       	ldd	r25, Y+33	; 0x21
+ 6ee:	82 30       	cpi	r24, 0x02	; 2
+ 6f0:	91 05       	cpc	r25, r1
+ 6f2:	31 f0       	breq	.+12     	; 0x700 <__stack+0x2a1>
+ 6f4:	8e 8d       	ldd	r24, Y+30	; 0x1e
+ 6f6:	9f 8d       	ldd	r25, Y+31	; 0x1f
+ 6f8:	82 30       	cpi	r24, 0x02	; 2
+ 6fa:	91 05       	cpc	r25, r1
+ 6fc:	09 f0       	breq	.+2      	; 0x700 <__stack+0x2a1>
+ 6fe:	7e c0       	rjmp	.+252    	; 0x7fc <__stack+0x39d>
+				 {
+					for(int i=0;i<34;i++)
+ 700:	1c 86       	std	Y+12, r1	; 0x0c
+ 702:	1b 86       	std	Y+11, r1	; 0x0b
+ 704:	6d c0       	rjmp	.+218    	; 0x7e0 <__stack+0x381>
+					{
+						k=keyPressed();//获取按下的键值
+ 706:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 70a:	88 2f       	mov	r24, r24
+ 70c:	90 e0       	ldi	r25, 0x00	; 0
+ 70e:	9b a3       	std	Y+35, r25	; 0x23
+ 710:	8a a3       	std	Y+34, r24	; 0x22
+						if(k==12)
+ 712:	8a a1       	ldd	r24, Y+34	; 0x22
+ 714:	9b a1       	ldd	r25, Y+35	; 0x23
+ 716:	8c 30       	cpi	r24, 0x0C	; 12
+ 718:	91 05       	cpc	r25, r1
+ 71a:	09 f4       	brne	.+2      	; 0x71e <__stack+0x2bf>
+ 71c:	67 c0       	rjmp	.+206    	; 0x7ec <__stack+0x38d>
+						{break;}
+                        else if(k==11)
+ 71e:	8a a1       	ldd	r24, Y+34	; 0x22
+ 720:	9b a1       	ldd	r25, Y+35	; 0x23
+ 722:	8b 30       	cpi	r24, 0x0B	; 11
+ 724:	91 05       	cpc	r25, r1
+ 726:	09 f4       	brne	.+2      	; 0x72a <__stack+0x2cb>
+ 728:	61 c0       	rjmp	.+194    	; 0x7ec <__stack+0x38d>
+						{break;last=k-1;}
+						else if(k==13)
+ 72a:	8a a1       	ldd	r24, Y+34	; 0x22
+ 72c:	9b a1       	ldd	r25, Y+35	; 0x23
+ 72e:	8d 30       	cpi	r24, 0x0D	; 13
+ 730:	91 05       	cpc	r25, r1
+ 732:	09 f4       	brne	.+2      	; 0x736 <__stack+0x2d7>
+ 734:	5b c0       	rjmp	.+182    	; 0x7ec <__stack+0x38d>
+						{break;next=k+1;}
+
+						else if(mamahao[i][0]!=0)
+ 736:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 738:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 73a:	88 0f       	add	r24, r24
+ 73c:	99 1f       	adc	r25, r25
+ 73e:	88 0f       	add	r24, r24
+ 740:	99 1f       	adc	r25, r25
+ 742:	fc 01       	movw	r30, r24
+ 744:	eb 50       	subi	r30, 0x0B	; 11
+ 746:	ff 4f       	sbci	r31, 0xFF	; 255
+ 748:	80 81       	ld	r24, Z
+ 74a:	91 81       	ldd	r25, Z+1	; 0x01
+ 74c:	00 97       	sbiw	r24, 0x00	; 0
+ 74e:	71 f1       	breq	.+92     	; 0x7ac <__stack+0x34d>
+						{
+						DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ 750:	a1 e3       	ldi	r26, 0x31	; 49
+ 752:	b0 e0       	ldi	r27, 0x00	; 0
+ 754:	e1 e3       	ldi	r30, 0x31	; 49
+ 756:	f0 e0       	ldi	r31, 0x00	; 0
+ 758:	80 81       	ld	r24, Z
+ 75a:	80 63       	ori	r24, 0x30	; 48
+ 75c:	8c 93       	st	X, r24
+						TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ 75e:	ef e4       	ldi	r30, 0x4F	; 79
+ 760:	f0 e0       	ldi	r31, 0x00	; 0
+ 762:	80 e5       	ldi	r24, 0x50	; 80
+ 764:	80 83       	st	Z, r24
+					    TCCR1B=0x09;
+ 766:	ee e4       	ldi	r30, 0x4E	; 78
+ 768:	f0 e0       	ldi	r31, 0x00	; 0
+ 76a:	89 e0       	ldi	r24, 0x09	; 9
+ 76c:	80 83       	st	Z, r24
+						OCR1A=(500000/mamahao[i][0]-1); //设置使得输出频率
+ 76e:	0a e4       	ldi	r16, 0x4A	; 74
+ 770:	10 e0       	ldi	r17, 0x00	; 0
+ 772:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 774:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 776:	88 0f       	add	r24, r24
+ 778:	99 1f       	adc	r25, r25
+ 77a:	88 0f       	add	r24, r24
+ 77c:	99 1f       	adc	r25, r25
+ 77e:	fc 01       	movw	r30, r24
+ 780:	eb 50       	subi	r30, 0x0B	; 11
+ 782:	ff 4f       	sbci	r31, 0xFF	; 255
+ 784:	80 81       	ld	r24, Z
+ 786:	91 81       	ldd	r25, Z+1	; 0x01
+ 788:	9c 01       	movw	r18, r24
+ 78a:	40 e0       	ldi	r20, 0x00	; 0
+ 78c:	50 e0       	ldi	r21, 0x00	; 0
+ 78e:	80 e2       	ldi	r24, 0x20	; 32
+ 790:	91 ea       	ldi	r25, 0xA1	; 161
+ 792:	a7 e0       	ldi	r26, 0x07	; 7
+ 794:	b0 e0       	ldi	r27, 0x00	; 0
+ 796:	bc 01       	movw	r22, r24
+ 798:	cd 01       	movw	r24, r26
+ 79a:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ 79e:	da 01       	movw	r26, r20
+ 7a0:	c9 01       	movw	r24, r18
+ 7a2:	01 97       	sbiw	r24, 0x01	; 1
+ 7a4:	f8 01       	movw	r30, r16
+ 7a6:	91 83       	std	Z+1, r25	; 0x01
+ 7a8:	80 83       	st	Z, r24
+ 7aa:	07 c0       	rjmp	.+14     	; 0x7ba <__stack+0x35b>
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ 7ac:	a1 e3       	ldi	r26, 0x31	; 49
+ 7ae:	b0 e0       	ldi	r27, 0x00	; 0
+ 7b0:	e1 e3       	ldi	r30, 0x31	; 49
+ 7b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7b4:	80 81       	ld	r24, Z
+ 7b6:	8f 7c       	andi	r24, 0xCF	; 207
+ 7b8:	8c 93       	st	X, r24
+						}
+						delay(mamahao[i][1]);//延时音长
+ 7ba:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 7bc:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 7be:	88 0f       	add	r24, r24
+ 7c0:	99 1f       	adc	r25, r25
+ 7c2:	01 96       	adiw	r24, 0x01	; 1
+ 7c4:	88 0f       	add	r24, r24
+ 7c6:	99 1f       	adc	r25, r25
+ 7c8:	fc 01       	movw	r30, r24
+ 7ca:	eb 50       	subi	r30, 0x0B	; 11
+ 7cc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 7ce:	80 81       	ld	r24, Z
+ 7d0:	91 81       	ldd	r25, Z+1	; 0x01
+ 7d2:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+					DDRD &= ~0x30;	
+					break;	
+				}
+				else if(k==2||last==2||next==2)//按1播放世上只有妈妈好
+				 {
+					for(int i=0;i<34;i++)
+ 7d6:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 7d8:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 7da:	01 96       	adiw	r24, 0x01	; 1
+ 7dc:	9c 87       	std	Y+12, r25	; 0x0c
+ 7de:	8b 87       	std	Y+11, r24	; 0x0b
+ 7e0:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 7e2:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 7e4:	82 32       	cpi	r24, 0x22	; 34
+ 7e6:	91 05       	cpc	r25, r1
+ 7e8:	0c f4       	brge	.+2      	; 0x7ec <__stack+0x38d>
+ 7ea:	8d cf       	rjmp	.-230    	; 0x706 <__stack+0x2a7>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(mamahao[i][1]);//延时音长
+					}
+                    DDRD &= ~0x30;
+ 7ec:	a1 e3       	ldi	r26, 0x31	; 49
+ 7ee:	b0 e0       	ldi	r27, 0x00	; 0
+ 7f0:	e1 e3       	ldi	r30, 0x31	; 49
+ 7f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7f4:	80 81       	ld	r24, Z
+ 7f6:	8f 7c       	andi	r24, 0xCF	; 207
+ 7f8:	8c 93       	st	X, r24
+ 7fa:	54 ce       	rjmp	.-856    	; 0x4a4 <__stack+0x45>
+					break;	
+				 }
+				else if(k==3||last==3||next==3)//按2播放超级玛丽奥
+ 7fc:	8a a1       	ldd	r24, Y+34	; 0x22
+ 7fe:	9b a1       	ldd	r25, Y+35	; 0x23
+ 800:	83 30       	cpi	r24, 0x03	; 3
+ 802:	91 05       	cpc	r25, r1
+ 804:	59 f0       	breq	.+22     	; 0x81c <__stack+0x3bd>
+ 806:	88 a1       	ldd	r24, Y+32	; 0x20
+ 808:	99 a1       	ldd	r25, Y+33	; 0x21
+ 80a:	83 30       	cpi	r24, 0x03	; 3
+ 80c:	91 05       	cpc	r25, r1
+ 80e:	31 f0       	breq	.+12     	; 0x81c <__stack+0x3bd>
+ 810:	8e 8d       	ldd	r24, Y+30	; 0x1e
+ 812:	9f 8d       	ldd	r25, Y+31	; 0x1f
+ 814:	83 30       	cpi	r24, 0x03	; 3
+ 816:	91 05       	cpc	r25, r1
+ 818:	09 f0       	breq	.+2      	; 0x81c <__stack+0x3bd>
+ 81a:	7e c0       	rjmp	.+252    	; 0x918 <__stack+0x4b9>
+				{
+					for(int i=0;i<53;i++)
+ 81c:	1a 86       	std	Y+10, r1	; 0x0a
+ 81e:	19 86       	std	Y+9, r1	; 0x09
+ 820:	6d c0       	rjmp	.+218    	; 0x8fc <__stack+0x49d>
+					{
+						k=keyPressed();//获取按下的键值
+ 822:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 826:	88 2f       	mov	r24, r24
+ 828:	90 e0       	ldi	r25, 0x00	; 0
+ 82a:	9b a3       	std	Y+35, r25	; 0x23
+ 82c:	8a a3       	std	Y+34, r24	; 0x22
+					    if(k==12)
+ 82e:	8a a1       	ldd	r24, Y+34	; 0x22
+ 830:	9b a1       	ldd	r25, Y+35	; 0x23
+ 832:	8c 30       	cpi	r24, 0x0C	; 12
+ 834:	91 05       	cpc	r25, r1
+ 836:	09 f4       	brne	.+2      	; 0x83a <__stack+0x3db>
+ 838:	67 c0       	rjmp	.+206    	; 0x908 <__stack+0x4a9>
+						{break;}
+                        else if(k==11)
+ 83a:	8a a1       	ldd	r24, Y+34	; 0x22
+ 83c:	9b a1       	ldd	r25, Y+35	; 0x23
+ 83e:	8b 30       	cpi	r24, 0x0B	; 11
+ 840:	91 05       	cpc	r25, r1
+ 842:	09 f4       	brne	.+2      	; 0x846 <__stack+0x3e7>
+ 844:	61 c0       	rjmp	.+194    	; 0x908 <__stack+0x4a9>
+						{break;last=k-1;}
+						else if(k==13)
+ 846:	8a a1       	ldd	r24, Y+34	; 0x22
+ 848:	9b a1       	ldd	r25, Y+35	; 0x23
+ 84a:	8d 30       	cpi	r24, 0x0D	; 13
+ 84c:	91 05       	cpc	r25, r1
+ 84e:	09 f4       	brne	.+2      	; 0x852 <__stack+0x3f3>
+ 850:	5b c0       	rjmp	.+182    	; 0x908 <__stack+0x4a9>
+						{break;next=k+1;}
+
+						else if(super_mario[i][0]!=0)
+ 852:	89 85       	ldd	r24, Y+9	; 0x09
+ 854:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 856:	88 0f       	add	r24, r24
+ 858:	99 1f       	adc	r25, r25
+ 85a:	88 0f       	add	r24, r24
+ 85c:	99 1f       	adc	r25, r25
+ 85e:	fc 01       	movw	r30, r24
+ 860:	ef 57       	subi	r30, 0x7F	; 127
+ 862:	fe 4f       	sbci	r31, 0xFE	; 254
+ 864:	80 81       	ld	r24, Z
+ 866:	91 81       	ldd	r25, Z+1	; 0x01
+ 868:	00 97       	sbiw	r24, 0x00	; 0
+ 86a:	71 f1       	breq	.+92     	; 0x8c8 <__stack+0x469>
+						{
+						DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ 86c:	a1 e3       	ldi	r26, 0x31	; 49
+ 86e:	b0 e0       	ldi	r27, 0x00	; 0
+ 870:	e1 e3       	ldi	r30, 0x31	; 49
+ 872:	f0 e0       	ldi	r31, 0x00	; 0
+ 874:	80 81       	ld	r24, Z
+ 876:	80 63       	ori	r24, 0x30	; 48
+ 878:	8c 93       	st	X, r24
+						TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ 87a:	ef e4       	ldi	r30, 0x4F	; 79
+ 87c:	f0 e0       	ldi	r31, 0x00	; 0
+ 87e:	80 e5       	ldi	r24, 0x50	; 80
+ 880:	80 83       	st	Z, r24
+					    TCCR1B=0x09;
+ 882:	ee e4       	ldi	r30, 0x4E	; 78
+ 884:	f0 e0       	ldi	r31, 0x00	; 0
+ 886:	89 e0       	ldi	r24, 0x09	; 9
+ 888:	80 83       	st	Z, r24
+						OCR1A=(500000/super_mario[i][0]-1); //设置使得输出频率
+ 88a:	0a e4       	ldi	r16, 0x4A	; 74
+ 88c:	10 e0       	ldi	r17, 0x00	; 0
+ 88e:	89 85       	ldd	r24, Y+9	; 0x09
+ 890:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 892:	88 0f       	add	r24, r24
+ 894:	99 1f       	adc	r25, r25
+ 896:	88 0f       	add	r24, r24
+ 898:	99 1f       	adc	r25, r25
+ 89a:	fc 01       	movw	r30, r24
+ 89c:	ef 57       	subi	r30, 0x7F	; 127
+ 89e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8a0:	80 81       	ld	r24, Z
+ 8a2:	91 81       	ldd	r25, Z+1	; 0x01
+ 8a4:	9c 01       	movw	r18, r24
+ 8a6:	40 e0       	ldi	r20, 0x00	; 0
+ 8a8:	50 e0       	ldi	r21, 0x00	; 0
+ 8aa:	80 e2       	ldi	r24, 0x20	; 32
+ 8ac:	91 ea       	ldi	r25, 0xA1	; 161
+ 8ae:	a7 e0       	ldi	r26, 0x07	; 7
+ 8b0:	b0 e0       	ldi	r27, 0x00	; 0
+ 8b2:	bc 01       	movw	r22, r24
+ 8b4:	cd 01       	movw	r24, r26
+ 8b6:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ 8ba:	da 01       	movw	r26, r20
+ 8bc:	c9 01       	movw	r24, r18
+ 8be:	01 97       	sbiw	r24, 0x01	; 1
+ 8c0:	f8 01       	movw	r30, r16
+ 8c2:	91 83       	std	Z+1, r25	; 0x01
+ 8c4:	80 83       	st	Z, r24
+ 8c6:	07 c0       	rjmp	.+14     	; 0x8d6 <__stack+0x477>
+
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ 8c8:	a1 e3       	ldi	r26, 0x31	; 49
+ 8ca:	b0 e0       	ldi	r27, 0x00	; 0
+ 8cc:	e1 e3       	ldi	r30, 0x31	; 49
+ 8ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 8d0:	80 81       	ld	r24, Z
+ 8d2:	8f 7c       	andi	r24, 0xCF	; 207
+ 8d4:	8c 93       	st	X, r24
+						}
+						delay(super_mario[i][1]);//延时音长	
+ 8d6:	89 85       	ldd	r24, Y+9	; 0x09
+ 8d8:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 8da:	88 0f       	add	r24, r24
+ 8dc:	99 1f       	adc	r25, r25
+ 8de:	01 96       	adiw	r24, 0x01	; 1
+ 8e0:	88 0f       	add	r24, r24
+ 8e2:	99 1f       	adc	r25, r25
+ 8e4:	fc 01       	movw	r30, r24
+ 8e6:	ef 57       	subi	r30, 0x7F	; 127
+ 8e8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8ea:	80 81       	ld	r24, Z
+ 8ec:	91 81       	ldd	r25, Z+1	; 0x01
+ 8ee:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+                    DDRD &= ~0x30;
+					break;	
+				 }
+				else if(k==3||last==3||next==3)//按2播放超级玛丽奥
+				{
+					for(int i=0;i<53;i++)
+ 8f2:	89 85       	ldd	r24, Y+9	; 0x09
+ 8f4:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 8f6:	01 96       	adiw	r24, 0x01	; 1
+ 8f8:	9a 87       	std	Y+10, r25	; 0x0a
+ 8fa:	89 87       	std	Y+9, r24	; 0x09
+ 8fc:	89 85       	ldd	r24, Y+9	; 0x09
+ 8fe:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 900:	85 33       	cpi	r24, 0x35	; 53
+ 902:	91 05       	cpc	r25, r1
+ 904:	0c f4       	brge	.+2      	; 0x908 <__stack+0x4a9>
+ 906:	8d cf       	rjmp	.-230    	; 0x822 <__stack+0x3c3>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(super_mario[i][1]);//延时音长	
+					}
+					DDRD &= ~0x30;
+ 908:	a1 e3       	ldi	r26, 0x31	; 49
+ 90a:	b0 e0       	ldi	r27, 0x00	; 0
+ 90c:	e1 e3       	ldi	r30, 0x31	; 49
+ 90e:	f0 e0       	ldi	r31, 0x00	; 0
+ 910:	80 81       	ld	r24, Z
+ 912:	8f 7c       	andi	r24, 0xCF	; 207
+ 914:	8c 93       	st	X, r24
+ 916:	c6 cd       	rjmp	.-1140   	; 0x4a4 <__stack+0x45>
+					break;
+				}
+				else if(k==4||last==4||next==4)//按2播放里两只老虎
+ 918:	8a a1       	ldd	r24, Y+34	; 0x22
+ 91a:	9b a1       	ldd	r25, Y+35	; 0x23
+ 91c:	84 30       	cpi	r24, 0x04	; 4
+ 91e:	91 05       	cpc	r25, r1
+ 920:	59 f0       	breq	.+22     	; 0x938 <__stack+0x4d9>
+ 922:	88 a1       	ldd	r24, Y+32	; 0x20
+ 924:	99 a1       	ldd	r25, Y+33	; 0x21
+ 926:	84 30       	cpi	r24, 0x04	; 4
+ 928:	91 05       	cpc	r25, r1
+ 92a:	31 f0       	breq	.+12     	; 0x938 <__stack+0x4d9>
+ 92c:	8e 8d       	ldd	r24, Y+30	; 0x1e
+ 92e:	9f 8d       	ldd	r25, Y+31	; 0x1f
+ 930:	84 30       	cpi	r24, 0x04	; 4
+ 932:	91 05       	cpc	r25, r1
+ 934:	09 f0       	breq	.+2      	; 0x938 <__stack+0x4d9>
+ 936:	7e c0       	rjmp	.+252    	; 0xa34 <__stack+0x5d5>
+				{
+					for(int i=0;i<32;i++)
+ 938:	18 86       	std	Y+8, r1	; 0x08
+ 93a:	1f 82       	std	Y+7, r1	; 0x07
+ 93c:	6d c0       	rjmp	.+218    	; 0xa18 <__stack+0x5b9>
+					{
+						k=keyPressed();//获取按下的键值
+ 93e:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ 942:	88 2f       	mov	r24, r24
+ 944:	90 e0       	ldi	r25, 0x00	; 0
+ 946:	9b a3       	std	Y+35, r25	; 0x23
+ 948:	8a a3       	std	Y+34, r24	; 0x22
+						if(k==12)
+ 94a:	8a a1       	ldd	r24, Y+34	; 0x22
+ 94c:	9b a1       	ldd	r25, Y+35	; 0x23
+ 94e:	8c 30       	cpi	r24, 0x0C	; 12
+ 950:	91 05       	cpc	r25, r1
+ 952:	09 f4       	brne	.+2      	; 0x956 <__stack+0x4f7>
+ 954:	67 c0       	rjmp	.+206    	; 0xa24 <__stack+0x5c5>
+						{break;}
+                        else if(k==11)
+ 956:	8a a1       	ldd	r24, Y+34	; 0x22
+ 958:	9b a1       	ldd	r25, Y+35	; 0x23
+ 95a:	8b 30       	cpi	r24, 0x0B	; 11
+ 95c:	91 05       	cpc	r25, r1
+ 95e:	09 f4       	brne	.+2      	; 0x962 <__stack+0x503>
+ 960:	61 c0       	rjmp	.+194    	; 0xa24 <__stack+0x5c5>
+						{break;last=k-1;}
+						else if(k==13)
+ 962:	8a a1       	ldd	r24, Y+34	; 0x22
+ 964:	9b a1       	ldd	r25, Y+35	; 0x23
+ 966:	8d 30       	cpi	r24, 0x0D	; 13
+ 968:	91 05       	cpc	r25, r1
+ 96a:	09 f4       	brne	.+2      	; 0x96e <__stack+0x50f>
+ 96c:	5b c0       	rjmp	.+182    	; 0xa24 <__stack+0x5c5>
+						{break;next=k+1;}
+
+						else if(two_tigers[i][0]!=0)
+ 96e:	8f 81       	ldd	r24, Y+7	; 0x07
+ 970:	98 85       	ldd	r25, Y+8	; 0x08
+ 972:	88 0f       	add	r24, r24
+ 974:	99 1f       	adc	r25, r25
+ 976:	88 0f       	add	r24, r24
+ 978:	99 1f       	adc	r25, r25
+ 97a:	fc 01       	movw	r30, r24
+ 97c:	eb 5a       	subi	r30, 0xAB	; 171
+ 97e:	fd 4f       	sbci	r31, 0xFD	; 253
+ 980:	80 81       	ld	r24, Z
+ 982:	91 81       	ldd	r25, Z+1	; 0x01
+ 984:	00 97       	sbiw	r24, 0x00	; 0
+ 986:	71 f1       	breq	.+92     	; 0x9e4 <__stack+0x585>
+						{
+						DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ 988:	a1 e3       	ldi	r26, 0x31	; 49
+ 98a:	b0 e0       	ldi	r27, 0x00	; 0
+ 98c:	e1 e3       	ldi	r30, 0x31	; 49
+ 98e:	f0 e0       	ldi	r31, 0x00	; 0
+ 990:	80 81       	ld	r24, Z
+ 992:	80 63       	ori	r24, 0x30	; 48
+ 994:	8c 93       	st	X, r24
+						TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ 996:	ef e4       	ldi	r30, 0x4F	; 79
+ 998:	f0 e0       	ldi	r31, 0x00	; 0
+ 99a:	80 e5       	ldi	r24, 0x50	; 80
+ 99c:	80 83       	st	Z, r24
+					    TCCR1B=0x09;
+ 99e:	ee e4       	ldi	r30, 0x4E	; 78
+ 9a0:	f0 e0       	ldi	r31, 0x00	; 0
+ 9a2:	89 e0       	ldi	r24, 0x09	; 9
+ 9a4:	80 83       	st	Z, r24
+						OCR1A=(500000/two_tigers[i][0]-1); //设置使得输出频率
+ 9a6:	0a e4       	ldi	r16, 0x4A	; 74
+ 9a8:	10 e0       	ldi	r17, 0x00	; 0
+ 9aa:	8f 81       	ldd	r24, Y+7	; 0x07
+ 9ac:	98 85       	ldd	r25, Y+8	; 0x08
+ 9ae:	88 0f       	add	r24, r24
+ 9b0:	99 1f       	adc	r25, r25
+ 9b2:	88 0f       	add	r24, r24
+ 9b4:	99 1f       	adc	r25, r25
+ 9b6:	fc 01       	movw	r30, r24
+ 9b8:	eb 5a       	subi	r30, 0xAB	; 171
+ 9ba:	fd 4f       	sbci	r31, 0xFD	; 253
+ 9bc:	80 81       	ld	r24, Z
+ 9be:	91 81       	ldd	r25, Z+1	; 0x01
+ 9c0:	9c 01       	movw	r18, r24
+ 9c2:	40 e0       	ldi	r20, 0x00	; 0
+ 9c4:	50 e0       	ldi	r21, 0x00	; 0
+ 9c6:	80 e2       	ldi	r24, 0x20	; 32
+ 9c8:	91 ea       	ldi	r25, 0xA1	; 161
+ 9ca:	a7 e0       	ldi	r26, 0x07	; 7
+ 9cc:	b0 e0       	ldi	r27, 0x00	; 0
+ 9ce:	bc 01       	movw	r22, r24
+ 9d0:	cd 01       	movw	r24, r26
+ 9d2:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ 9d6:	da 01       	movw	r26, r20
+ 9d8:	c9 01       	movw	r24, r18
+ 9da:	01 97       	sbiw	r24, 0x01	; 1
+ 9dc:	f8 01       	movw	r30, r16
+ 9de:	91 83       	std	Z+1, r25	; 0x01
+ 9e0:	80 83       	st	Z, r24
+ 9e2:	07 c0       	rjmp	.+14     	; 0x9f2 <__stack+0x593>
+
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ 9e4:	a1 e3       	ldi	r26, 0x31	; 49
+ 9e6:	b0 e0       	ldi	r27, 0x00	; 0
+ 9e8:	e1 e3       	ldi	r30, 0x31	; 49
+ 9ea:	f0 e0       	ldi	r31, 0x00	; 0
+ 9ec:	80 81       	ld	r24, Z
+ 9ee:	8f 7c       	andi	r24, 0xCF	; 207
+ 9f0:	8c 93       	st	X, r24
+						}
+						delay(two_tigers[i][1]);//延时音长	
+ 9f2:	8f 81       	ldd	r24, Y+7	; 0x07
+ 9f4:	98 85       	ldd	r25, Y+8	; 0x08
+ 9f6:	88 0f       	add	r24, r24
+ 9f8:	99 1f       	adc	r25, r25
+ 9fa:	01 96       	adiw	r24, 0x01	; 1
+ 9fc:	88 0f       	add	r24, r24
+ 9fe:	99 1f       	adc	r25, r25
+ a00:	fc 01       	movw	r30, r24
+ a02:	eb 5a       	subi	r30, 0xAB	; 171
+ a04:	fd 4f       	sbci	r31, 0xFD	; 253
+ a06:	80 81       	ld	r24, Z
+ a08:	91 81       	ldd	r25, Z+1	; 0x01
+ a0a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+					DDRD &= ~0x30;
+					break;
+				}
+				else if(k==4||last==4||next==4)//按2播放里两只老虎
+				{
+					for(int i=0;i<32;i++)
+ a0e:	8f 81       	ldd	r24, Y+7	; 0x07
+ a10:	98 85       	ldd	r25, Y+8	; 0x08
+ a12:	01 96       	adiw	r24, 0x01	; 1
+ a14:	98 87       	std	Y+8, r25	; 0x08
+ a16:	8f 83       	std	Y+7, r24	; 0x07
+ a18:	8f 81       	ldd	r24, Y+7	; 0x07
+ a1a:	98 85       	ldd	r25, Y+8	; 0x08
+ a1c:	80 32       	cpi	r24, 0x20	; 32
+ a1e:	91 05       	cpc	r25, r1
+ a20:	0c f4       	brge	.+2      	; 0xa24 <__stack+0x5c5>
+ a22:	8d cf       	rjmp	.-230    	; 0x93e <__stack+0x4df>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(two_tigers[i][1]);//延时音长	
+					}
+					DDRD &= ~0x30;
+ a24:	a1 e3       	ldi	r26, 0x31	; 49
+ a26:	b0 e0       	ldi	r27, 0x00	; 0
+ a28:	e1 e3       	ldi	r30, 0x31	; 49
+ a2a:	f0 e0       	ldi	r31, 0x00	; 0
+ a2c:	80 81       	ld	r24, Z
+ a2e:	8f 7c       	andi	r24, 0xCF	; 207
+ a30:	8c 93       	st	X, r24
+ a32:	38 cd       	rjmp	.-1424   	; 0x4a4 <__stack+0x45>
+					break;
+				}
+				else if(k==5||last==5||next==5)//按2播放里天空之城
+ a34:	8a a1       	ldd	r24, Y+34	; 0x22
+ a36:	9b a1       	ldd	r25, Y+35	; 0x23
+ a38:	85 30       	cpi	r24, 0x05	; 5
+ a3a:	91 05       	cpc	r25, r1
+ a3c:	59 f0       	breq	.+22     	; 0xa54 <__stack+0x5f5>
+ a3e:	88 a1       	ldd	r24, Y+32	; 0x20
+ a40:	99 a1       	ldd	r25, Y+33	; 0x21
+ a42:	85 30       	cpi	r24, 0x05	; 5
+ a44:	91 05       	cpc	r25, r1
+ a46:	31 f0       	breq	.+12     	; 0xa54 <__stack+0x5f5>
+ a48:	8e 8d       	ldd	r24, Y+30	; 0x1e
+ a4a:	9f 8d       	ldd	r25, Y+31	; 0x1f
+ a4c:	85 30       	cpi	r24, 0x05	; 5
+ a4e:	91 05       	cpc	r25, r1
+ a50:	09 f0       	breq	.+2      	; 0xa54 <__stack+0x5f5>
+ a52:	b2 cd       	rjmp	.-1180   	; 0x5b8 <__stack+0x159>
+				{
+					for(int i=0;i<65;i++)
+ a54:	1e 82       	std	Y+6, r1	; 0x06
+ a56:	1d 82       	std	Y+5, r1	; 0x05
+ a58:	6d c0       	rjmp	.+218    	; 0xb34 <__stack+0x6d5>
+					{
+						k=keyPressed();//获取按下的键值
+ a5a:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ a5e:	88 2f       	mov	r24, r24
+ a60:	90 e0       	ldi	r25, 0x00	; 0
+ a62:	9b a3       	std	Y+35, r25	; 0x23
+ a64:	8a a3       	std	Y+34, r24	; 0x22
+						if(k==12)
+ a66:	8a a1       	ldd	r24, Y+34	; 0x22
+ a68:	9b a1       	ldd	r25, Y+35	; 0x23
+ a6a:	8c 30       	cpi	r24, 0x0C	; 12
+ a6c:	91 05       	cpc	r25, r1
+ a6e:	09 f4       	brne	.+2      	; 0xa72 <__stack+0x613>
+ a70:	67 c0       	rjmp	.+206    	; 0xb40 <__stack+0x6e1>
+						{break;}
+                        else if(k==11)
+ a72:	8a a1       	ldd	r24, Y+34	; 0x22
+ a74:	9b a1       	ldd	r25, Y+35	; 0x23
+ a76:	8b 30       	cpi	r24, 0x0B	; 11
+ a78:	91 05       	cpc	r25, r1
+ a7a:	09 f4       	brne	.+2      	; 0xa7e <__stack+0x61f>
+ a7c:	61 c0       	rjmp	.+194    	; 0xb40 <__stack+0x6e1>
+						{break;last=k-1;}
+						else if(k==13)
+ a7e:	8a a1       	ldd	r24, Y+34	; 0x22
+ a80:	9b a1       	ldd	r25, Y+35	; 0x23
+ a82:	8d 30       	cpi	r24, 0x0D	; 13
+ a84:	91 05       	cpc	r25, r1
+ a86:	09 f4       	brne	.+2      	; 0xa8a <__stack+0x62b>
+ a88:	5b c0       	rjmp	.+182    	; 0xb40 <__stack+0x6e1>
+						{break;next=k+1;}
+
+						else if(TiankongZC[i][0]!=0)
+ a8a:	8d 81       	ldd	r24, Y+5	; 0x05
+ a8c:	9e 81       	ldd	r25, Y+6	; 0x06
+ a8e:	88 0f       	add	r24, r24
+ a90:	99 1f       	adc	r25, r25
+ a92:	88 0f       	add	r24, r24
+ a94:	99 1f       	adc	r25, r25
+ a96:	fc 01       	movw	r30, r24
+ a98:	e7 52       	subi	r30, 0x27	; 39
+ a9a:	fd 4f       	sbci	r31, 0xFD	; 253
+ a9c:	80 81       	ld	r24, Z
+ a9e:	91 81       	ldd	r25, Z+1	; 0x01
+ aa0:	00 97       	sbiw	r24, 0x00	; 0
+ aa2:	71 f1       	breq	.+92     	; 0xb00 <__stack+0x6a1>
+						{
+						DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ aa4:	a1 e3       	ldi	r26, 0x31	; 49
+ aa6:	b0 e0       	ldi	r27, 0x00	; 0
+ aa8:	e1 e3       	ldi	r30, 0x31	; 49
+ aaa:	f0 e0       	ldi	r31, 0x00	; 0
+ aac:	80 81       	ld	r24, Z
+ aae:	80 63       	ori	r24, 0x30	; 48
+ ab0:	8c 93       	st	X, r24
+						TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ ab2:	ef e4       	ldi	r30, 0x4F	; 79
+ ab4:	f0 e0       	ldi	r31, 0x00	; 0
+ ab6:	80 e5       	ldi	r24, 0x50	; 80
+ ab8:	80 83       	st	Z, r24
+					    TCCR1B=0x09;
+ aba:	ee e4       	ldi	r30, 0x4E	; 78
+ abc:	f0 e0       	ldi	r31, 0x00	; 0
+ abe:	89 e0       	ldi	r24, 0x09	; 9
+ ac0:	80 83       	st	Z, r24
+						OCR1A=(500000/TiankongZC[i][0]-1); //设置使得输出频率
+ ac2:	0a e4       	ldi	r16, 0x4A	; 74
+ ac4:	10 e0       	ldi	r17, 0x00	; 0
+ ac6:	8d 81       	ldd	r24, Y+5	; 0x05
+ ac8:	9e 81       	ldd	r25, Y+6	; 0x06
+ aca:	88 0f       	add	r24, r24
+ acc:	99 1f       	adc	r25, r25
+ ace:	88 0f       	add	r24, r24
+ ad0:	99 1f       	adc	r25, r25
+ ad2:	fc 01       	movw	r30, r24
+ ad4:	e7 52       	subi	r30, 0x27	; 39
+ ad6:	fd 4f       	sbci	r31, 0xFD	; 253
+ ad8:	80 81       	ld	r24, Z
+ ada:	91 81       	ldd	r25, Z+1	; 0x01
+ adc:	9c 01       	movw	r18, r24
+ ade:	40 e0       	ldi	r20, 0x00	; 0
+ ae0:	50 e0       	ldi	r21, 0x00	; 0
+ ae2:	80 e2       	ldi	r24, 0x20	; 32
+ ae4:	91 ea       	ldi	r25, 0xA1	; 161
+ ae6:	a7 e0       	ldi	r26, 0x07	; 7
+ ae8:	b0 e0       	ldi	r27, 0x00	; 0
+ aea:	bc 01       	movw	r22, r24
+ aec:	cd 01       	movw	r24, r26
+ aee:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ af2:	da 01       	movw	r26, r20
+ af4:	c9 01       	movw	r24, r18
+ af6:	01 97       	sbiw	r24, 0x01	; 1
+ af8:	f8 01       	movw	r30, r16
+ afa:	91 83       	std	Z+1, r25	; 0x01
+ afc:	80 83       	st	Z, r24
+ afe:	07 c0       	rjmp	.+14     	; 0xb0e <__stack+0x6af>
+
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ b00:	a1 e3       	ldi	r26, 0x31	; 49
+ b02:	b0 e0       	ldi	r27, 0x00	; 0
+ b04:	e1 e3       	ldi	r30, 0x31	; 49
+ b06:	f0 e0       	ldi	r31, 0x00	; 0
+ b08:	80 81       	ld	r24, Z
+ b0a:	8f 7c       	andi	r24, 0xCF	; 207
+ b0c:	8c 93       	st	X, r24
+						}
+						delay(TiankongZC[i][1]);//延时音长	
+ b0e:	8d 81       	ldd	r24, Y+5	; 0x05
+ b10:	9e 81       	ldd	r25, Y+6	; 0x06
+ b12:	88 0f       	add	r24, r24
+ b14:	99 1f       	adc	r25, r25
+ b16:	01 96       	adiw	r24, 0x01	; 1
+ b18:	88 0f       	add	r24, r24
+ b1a:	99 1f       	adc	r25, r25
+ b1c:	fc 01       	movw	r30, r24
+ b1e:	e7 52       	subi	r30, 0x27	; 39
+ b20:	fd 4f       	sbci	r31, 0xFD	; 253
+ b22:	80 81       	ld	r24, Z
+ b24:	91 81       	ldd	r25, Z+1	; 0x01
+ b26:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+					DDRD &= ~0x30;
+					break;
+				}
+				else if(k==5||last==5||next==5)//按2播放里天空之城
+				{
+					for(int i=0;i<65;i++)
+ b2a:	8d 81       	ldd	r24, Y+5	; 0x05
+ b2c:	9e 81       	ldd	r25, Y+6	; 0x06
+ b2e:	01 96       	adiw	r24, 0x01	; 1
+ b30:	9e 83       	std	Y+6, r25	; 0x06
+ b32:	8d 83       	std	Y+5, r24	; 0x05
+ b34:	8d 81       	ldd	r24, Y+5	; 0x05
+ b36:	9e 81       	ldd	r25, Y+6	; 0x06
+ b38:	81 34       	cpi	r24, 0x41	; 65
+ b3a:	91 05       	cpc	r25, r1
+ b3c:	0c f4       	brge	.+2      	; 0xb40 <__stack+0x6e1>
+ b3e:	8d cf       	rjmp	.-230    	; 0xa5a <__stack+0x5fb>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(TiankongZC[i][1]);//延时音长	
+					}
+					DDRD &= ~0x30;
+ b40:	a1 e3       	ldi	r26, 0x31	; 49
+ b42:	b0 e0       	ldi	r27, 0x00	; 0
+ b44:	e1 e3       	ldi	r30, 0x31	; 49
+ b46:	f0 e0       	ldi	r31, 0x00	; 0
+ b48:	80 81       	ld	r24, Z
+ b4a:	8f 7c       	andi	r24, 0xCF	; 207
+ b4c:	8c 93       	st	X, r24
+ b4e:	aa cc       	rjmp	.-1708   	; 0x4a4 <__stack+0x45>
+					break;
+				}
+               } 
+			}
+		
+			else if(k==12)//暂停键
+ b50:	8a a1       	ldd	r24, Y+34	; 0x22
+ b52:	9b a1       	ldd	r25, Y+35	; 0x23
+ b54:	8c 30       	cpi	r24, 0x0C	; 12
+ b56:	91 05       	cpc	r25, r1
+ b58:	21 f4       	brne	.+8      	; 0xb62 <__stack+0x703>
+			{
+				DDRD=0x00;
+ b5a:	e1 e3       	ldi	r30, 0x31	; 49
+ b5c:	f0 e0       	ldi	r31, 0x00	; 0
+ b5e:	10 82       	st	Z, r1
+ b60:	a1 cc       	rjmp	.-1726   	; 0x4a4 <__stack+0x45>
+			}
+			else if(k==14)//录音键
+ b62:	8a a1       	ldd	r24, Y+34	; 0x22
+ b64:	9b a1       	ldd	r25, Y+35	; 0x23
+ b66:	8e 30       	cpi	r24, 0x0E	; 14
+ b68:	91 05       	cpc	r25, r1
+ b6a:	69 f5       	brne	.+90     	; 0xbc6 <__stack+0x767>
+						music_p[i][0]=0;
+						music_p[i][1]=0;
+					 }
+					 m1=0;
+				}*/
+				j=1;
+ b6c:	81 e0       	ldi	r24, 0x01	; 1
+ b6e:	90 e0       	ldi	r25, 0x00	; 0
+ b70:	9d 8f       	std	Y+29, r25	; 0x1d
+ b72:	8c 8f       	std	Y+28, r24	; 0x1c
+				for(int i=0;i<m1;i++)
+ b74:	1c 82       	std	Y+4, r1	; 0x04
+ b76:	1b 82       	std	Y+3, r1	; 0x03
+ b78:	1c c0       	rjmp	.+56     	; 0xbb2 <__stack+0x753>
+				{
+					music_p[i][0]=0;
+ b7a:	8b 81       	ldd	r24, Y+3	; 0x03
+ b7c:	9c 81       	ldd	r25, Y+4	; 0x04
+ b7e:	88 0f       	add	r24, r24
+ b80:	99 1f       	adc	r25, r25
+ b82:	88 0f       	add	r24, r24
+ b84:	99 1f       	adc	r25, r25
+ b86:	fc 01       	movw	r30, r24
+ b88:	ee 51       	subi	r30, 0x1E	; 30
+ b8a:	fc 4f       	sbci	r31, 0xFC	; 252
+ b8c:	11 82       	std	Z+1, r1	; 0x01
+ b8e:	10 82       	st	Z, r1
+					music_p[i][1]=0;
+ b90:	8b 81       	ldd	r24, Y+3	; 0x03
+ b92:	9c 81       	ldd	r25, Y+4	; 0x04
+ b94:	88 0f       	add	r24, r24
+ b96:	99 1f       	adc	r25, r25
+ b98:	01 96       	adiw	r24, 0x01	; 1
+ b9a:	88 0f       	add	r24, r24
+ b9c:	99 1f       	adc	r25, r25
+ b9e:	fc 01       	movw	r30, r24
+ ba0:	ee 51       	subi	r30, 0x1E	; 30
+ ba2:	fc 4f       	sbci	r31, 0xFC	; 252
+ ba4:	11 82       	std	Z+1, r1	; 0x01
+ ba6:	10 82       	st	Z, r1
+						music_p[i][1]=0;
+					 }
+					 m1=0;
+				}*/
+				j=1;
+				for(int i=0;i<m1;i++)
+ ba8:	8b 81       	ldd	r24, Y+3	; 0x03
+ baa:	9c 81       	ldd	r25, Y+4	; 0x04
+ bac:	01 96       	adiw	r24, 0x01	; 1
+ bae:	9c 83       	std	Y+4, r25	; 0x04
+ bb0:	8b 83       	std	Y+3, r24	; 0x03
+ bb2:	2b 81       	ldd	r18, Y+3	; 0x03
+ bb4:	3c 81       	ldd	r19, Y+4	; 0x04
+ bb6:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ bb8:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ bba:	28 17       	cp	r18, r24
+ bbc:	39 07       	cpc	r19, r25
+ bbe:	ec f2       	brlt	.-70     	; 0xb7a <__stack+0x71b>
+				{
+					music_p[i][0]=0;
+					music_p[i][1]=0;
+				}
+				m1=0;
+ bc0:	1b 8e       	std	Y+27, r1	; 0x1b
+ bc2:	1a 8e       	std	Y+26, r1	; 0x1a
+ bc4:	6f cc       	rjmp	.-1826   	; 0x4a4 <__stack+0x45>
+
+			}
+			else if(k==15) //播放录入的音乐
+ bc6:	8a a1       	ldd	r24, Y+34	; 0x22
+ bc8:	9b a1       	ldd	r25, Y+35	; 0x23
+ bca:	8f 30       	cpi	r24, 0x0F	; 15
+ bcc:	91 05       	cpc	r25, r1
+ bce:	09 f0       	breq	.+2      	; 0xbd2 <__stack+0x773>
+ bd0:	eb c0       	rjmp	.+470    	; 0xda8 <__stack+0x949>
+			{
+			
+				if(m1!=0)
+ bd2:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ bd4:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ bd6:	00 97       	sbiw	r24, 0x00	; 0
+ bd8:	09 f4       	brne	.+2      	; 0xbdc <__stack+0x77d>
+ bda:	64 cc       	rjmp	.-1848   	; 0x4a4 <__stack+0x45>
+				{
+					for(int i=0;i<m1;i++)
+ bdc:	1a 82       	std	Y+2, r1	; 0x02
+ bde:	19 82       	std	Y+1, r1	; 0x01
+ be0:	61 c0       	rjmp	.+194    	; 0xca4 <__stack+0x845>
+					{
+						k=keyPressed();//获取按下的键值
+ be2:	0e 94 27 01 	call	0x24e	; 0x24e <keyPressed>
+ be6:	88 2f       	mov	r24, r24
+ be8:	90 e0       	ldi	r25, 0x00	; 0
+ bea:	9b a3       	std	Y+35, r25	; 0x23
+ bec:	8a a3       	std	Y+34, r24	; 0x22
+						if(k==13)
+ bee:	8a a1       	ldd	r24, Y+34	; 0x22
+ bf0:	9b a1       	ldd	r25, Y+35	; 0x23
+ bf2:	8d 30       	cpi	r24, 0x0D	; 13
+ bf4:	91 05       	cpc	r25, r1
+ bf6:	09 f4       	brne	.+2      	; 0xbfa <__stack+0x79b>
+ bf8:	5d c0       	rjmp	.+186    	; 0xcb4 <__stack+0x855>
+						{break;}
+
+						else if(music_p[i][0]!=0)
+ bfa:	89 81       	ldd	r24, Y+1	; 0x01
+ bfc:	9a 81       	ldd	r25, Y+2	; 0x02
+ bfe:	88 0f       	add	r24, r24
+ c00:	99 1f       	adc	r25, r25
+ c02:	88 0f       	add	r24, r24
+ c04:	99 1f       	adc	r25, r25
+ c06:	fc 01       	movw	r30, r24
+ c08:	ee 51       	subi	r30, 0x1E	; 30
+ c0a:	fc 4f       	sbci	r31, 0xFC	; 252
+ c0c:	80 81       	ld	r24, Z
+ c0e:	91 81       	ldd	r25, Z+1	; 0x01
+ c10:	00 97       	sbiw	r24, 0x00	; 0
+ c12:	71 f1       	breq	.+92     	; 0xc70 <__stack+0x811>
+						{
+						DDRD|=0x30;   //设置PD4和PD5为输出（PD4对应OC1B,PD5对应OC1A）
+ c14:	a1 e3       	ldi	r26, 0x31	; 49
+ c16:	b0 e0       	ldi	r27, 0x00	; 0
+ c18:	e1 e3       	ldi	r30, 0x31	; 49
+ c1a:	f0 e0       	ldi	r31, 0x00	; 0
+ c1c:	80 81       	ld	r24, Z
+ c1e:	80 63       	ori	r24, 0x30	; 48
+ c20:	8c 93       	st	X, r24
+						TCCR1A=0x50;  //一下两个设置使得：无分频，计数上限ICR1，OC1B/OC1A电平取反
+ c22:	ef e4       	ldi	r30, 0x4F	; 79
+ c24:	f0 e0       	ldi	r31, 0x00	; 0
+ c26:	80 e5       	ldi	r24, 0x50	; 80
+ c28:	80 83       	st	Z, r24
+					    TCCR1B=0x09;
+ c2a:	ee e4       	ldi	r30, 0x4E	; 78
+ c2c:	f0 e0       	ldi	r31, 0x00	; 0
+ c2e:	89 e0       	ldi	r24, 0x09	; 9
+ c30:	80 83       	st	Z, r24
+						OCR1A=(500000/music_p[i][0]-1); //设置使得输出频率
+ c32:	0a e4       	ldi	r16, 0x4A	; 74
+ c34:	10 e0       	ldi	r17, 0x00	; 0
+ c36:	89 81       	ldd	r24, Y+1	; 0x01
+ c38:	9a 81       	ldd	r25, Y+2	; 0x02
+ c3a:	88 0f       	add	r24, r24
+ c3c:	99 1f       	adc	r25, r25
+ c3e:	88 0f       	add	r24, r24
+ c40:	99 1f       	adc	r25, r25
+ c42:	fc 01       	movw	r30, r24
+ c44:	ee 51       	subi	r30, 0x1E	; 30
+ c46:	fc 4f       	sbci	r31, 0xFC	; 252
+ c48:	80 81       	ld	r24, Z
+ c4a:	91 81       	ldd	r25, Z+1	; 0x01
+ c4c:	9c 01       	movw	r18, r24
+ c4e:	40 e0       	ldi	r20, 0x00	; 0
+ c50:	50 e0       	ldi	r21, 0x00	; 0
+ c52:	80 e2       	ldi	r24, 0x20	; 32
+ c54:	91 ea       	ldi	r25, 0xA1	; 161
+ c56:	a7 e0       	ldi	r26, 0x07	; 7
+ c58:	b0 e0       	ldi	r27, 0x00	; 0
+ c5a:	bc 01       	movw	r22, r24
+ c5c:	cd 01       	movw	r24, r26
+ c5e:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ c62:	da 01       	movw	r26, r20
+ c64:	c9 01       	movw	r24, r18
+ c66:	01 97       	sbiw	r24, 0x01	; 1
+ c68:	f8 01       	movw	r30, r16
+ c6a:	91 83       	std	Z+1, r25	; 0x01
+ c6c:	80 83       	st	Z, r24
+ c6e:	07 c0       	rjmp	.+14     	; 0xc7e <__stack+0x81f>
+
+						}
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+ c70:	a1 e3       	ldi	r26, 0x31	; 49
+ c72:	b0 e0       	ldi	r27, 0x00	; 0
+ c74:	e1 e3       	ldi	r30, 0x31	; 49
+ c76:	f0 e0       	ldi	r31, 0x00	; 0
+ c78:	80 81       	ld	r24, Z
+ c7a:	8f 7c       	andi	r24, 0xCF	; 207
+ c7c:	8c 93       	st	X, r24
+						}
+						delay(music_p[i][1]);//延时音长	
+ c7e:	89 81       	ldd	r24, Y+1	; 0x01
+ c80:	9a 81       	ldd	r25, Y+2	; 0x02
+ c82:	88 0f       	add	r24, r24
+ c84:	99 1f       	adc	r25, r25
+ c86:	01 96       	adiw	r24, 0x01	; 1
+ c88:	88 0f       	add	r24, r24
+ c8a:	99 1f       	adc	r25, r25
+ c8c:	fc 01       	movw	r30, r24
+ c8e:	ee 51       	subi	r30, 0x1E	; 30
+ c90:	fc 4f       	sbci	r31, 0xFC	; 252
+ c92:	80 81       	ld	r24, Z
+ c94:	91 81       	ldd	r25, Z+1	; 0x01
+ c96:	0e 94 e7 00 	call	0x1ce	; 0x1ce <delay>
+			else if(k==15) //播放录入的音乐
+			{
+			
+				if(m1!=0)
+				{
+					for(int i=0;i<m1;i++)
+ c9a:	89 81       	ldd	r24, Y+1	; 0x01
+ c9c:	9a 81       	ldd	r25, Y+2	; 0x02
+ c9e:	01 96       	adiw	r24, 0x01	; 1
+ ca0:	9a 83       	std	Y+2, r25	; 0x02
+ ca2:	89 83       	std	Y+1, r24	; 0x01
+ ca4:	29 81       	ldd	r18, Y+1	; 0x01
+ ca6:	3a 81       	ldd	r19, Y+2	; 0x02
+ ca8:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ caa:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ cac:	28 17       	cp	r18, r24
+ cae:	39 07       	cpc	r19, r25
+ cb0:	0c f4       	brge	.+2      	; 0xcb4 <__stack+0x855>
+ cb2:	97 cf       	rjmp	.-210    	; 0xbe2 <__stack+0x783>
+						else{
+							DDRD&=~0x30;   //设置PD4和PD5为输入
+						}
+						delay(music_p[i][1]);//延时音长	
+					}
+					DDRD &= ~0x30;
+ cb4:	a1 e3       	ldi	r26, 0x31	; 49
+ cb6:	b0 e0       	ldi	r27, 0x00	; 0
+ cb8:	e1 e3       	ldi	r30, 0x31	; 49
+ cba:	f0 e0       	ldi	r31, 0x00	; 0
+ cbc:	80 81       	ld	r24, Z
+ cbe:	8f 7c       	andi	r24, 0xCF	; 207
+ cc0:	8c 93       	st	X, r24
+					j=0;
+ cc2:	1d 8e       	std	Y+29, r1	; 0x1d
+ cc4:	1c 8e       	std	Y+28, r1	; 0x1c
+ cc6:	ee cb       	rjmp	.-2084   	; 0x4a4 <__stack+0x45>
+			}
+			else//播放按下的音符
+			{
+				while(isKeyPress())
+				{
+					DDRD|=0x30;
+ cc8:	a1 e3       	ldi	r26, 0x31	; 49
+ cca:	b0 e0       	ldi	r27, 0x00	; 0
+ ccc:	e1 e3       	ldi	r30, 0x31	; 49
+ cce:	f0 e0       	ldi	r31, 0x00	; 0
+ cd0:	80 81       	ld	r24, Z
+ cd2:	80 63       	ori	r24, 0x30	; 48
+ cd4:	8c 93       	st	X, r24
+				    TCCR1A=0x50;
+ cd6:	ef e4       	ldi	r30, 0x4F	; 79
+ cd8:	f0 e0       	ldi	r31, 0x00	; 0
+ cda:	80 e5       	ldi	r24, 0x50	; 80
+ cdc:	80 83       	st	Z, r24
+				    TCCR1B=0x09;
+ cde:	ee e4       	ldi	r30, 0x4E	; 78
+ ce0:	f0 e0       	ldi	r31, 0x00	; 0
+ ce2:	89 e0       	ldi	r24, 0x09	; 9
+ ce4:	80 83       	st	Z, r24
+					OCR1A=(500000/music[k-1]-1);
+ ce6:	0a e4       	ldi	r16, 0x4A	; 74
+ ce8:	10 e0       	ldi	r17, 0x00	; 0
+ cea:	8a a1       	ldd	r24, Y+34	; 0x22
+ cec:	9b a1       	ldd	r25, Y+35	; 0x23
+ cee:	01 97       	sbiw	r24, 0x01	; 1
+ cf0:	88 0f       	add	r24, r24
+ cf2:	99 1f       	adc	r25, r25
+ cf4:	fc 01       	movw	r30, r24
+ cf6:	ed 56       	subi	r30, 0x6D	; 109
+ cf8:	ff 4f       	sbci	r31, 0xFF	; 255
+ cfa:	80 81       	ld	r24, Z
+ cfc:	91 81       	ldd	r25, Z+1	; 0x01
+ cfe:	9c 01       	movw	r18, r24
+ d00:	40 e0       	ldi	r20, 0x00	; 0
+ d02:	50 e0       	ldi	r21, 0x00	; 0
+ d04:	80 e2       	ldi	r24, 0x20	; 32
+ d06:	91 ea       	ldi	r25, 0xA1	; 161
+ d08:	a7 e0       	ldi	r26, 0x07	; 7
+ d0a:	b0 e0       	ldi	r27, 0x00	; 0
+ d0c:	bc 01       	movw	r22, r24
+ d0e:	cd 01       	movw	r24, r26
+ d10:	0e 94 10 07 	call	0xe20	; 0xe20 <__divmodsi4>
+ d14:	da 01       	movw	r26, r20
+ d16:	c9 01       	movw	r24, r18
+ d18:	01 97       	sbiw	r24, 0x01	; 1
+ d1a:	f8 01       	movw	r30, r16
+ d1c:	91 83       	std	Z+1, r25	; 0x01
+ d1e:	80 83       	st	Z, r24
+					if(j)		 //开启录入模式后，将音乐存入RAM
+ d20:	8c 8d       	ldd	r24, Y+28	; 0x1c
+ d22:	9d 8d       	ldd	r25, Y+29	; 0x1d
+ d24:	00 97       	sbiw	r24, 0x00	; 0
+ d26:	09 f4       	brne	.+2      	; 0xd2a <__stack+0x8cb>
+ d28:	3f c0       	rjmp	.+126    	; 0xda8 <__stack+0x949>
+					{    
+						music_p[m1][0]=0;
+ d2a:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ d2c:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ d2e:	88 0f       	add	r24, r24
+ d30:	99 1f       	adc	r25, r25
+ d32:	88 0f       	add	r24, r24
+ d34:	99 1f       	adc	r25, r25
+ d36:	fc 01       	movw	r30, r24
+ d38:	ee 51       	subi	r30, 0x1E	; 30
+ d3a:	fc 4f       	sbci	r31, 0xFC	; 252
+ d3c:	11 82       	std	Z+1, r1	; 0x01
+ d3e:	10 82       	st	Z, r1
+						music_p[m1][1]=m3/7;
+ d40:	ea 8d       	ldd	r30, Y+26	; 0x1a
+ d42:	fb 8d       	ldd	r31, Y+27	; 0x1b
+ d44:	8e 89       	ldd	r24, Y+22	; 0x16
+ d46:	9f 89       	ldd	r25, Y+23	; 0x17
+ d48:	27 e0       	ldi	r18, 0x07	; 7
+ d4a:	30 e0       	ldi	r19, 0x00	; 0
+ d4c:	b9 01       	movw	r22, r18
+ d4e:	0e 94 fd 06 	call	0xdfa	; 0xdfa <__divmodhi4>
+ d52:	cb 01       	movw	r24, r22
+ d54:	9c 01       	movw	r18, r24
+ d56:	cf 01       	movw	r24, r30
+ d58:	88 0f       	add	r24, r24
+ d5a:	99 1f       	adc	r25, r25
+ d5c:	01 96       	adiw	r24, 0x01	; 1
+ d5e:	88 0f       	add	r24, r24
+ d60:	99 1f       	adc	r25, r25
+ d62:	fc 01       	movw	r30, r24
+ d64:	ee 51       	subi	r30, 0x1E	; 30
+ d66:	fc 4f       	sbci	r31, 0xFC	; 252
+ d68:	31 83       	std	Z+1, r19	; 0x01
+ d6a:	20 83       	st	Z, r18
+						music_p[m1+1][0]=music[k-1];
+ d6c:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ d6e:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ d70:	ac 01       	movw	r20, r24
+ d72:	4f 5f       	subi	r20, 0xFF	; 255
+ d74:	5f 4f       	sbci	r21, 0xFF	; 255
+ d76:	8a a1       	ldd	r24, Y+34	; 0x22
+ d78:	9b a1       	ldd	r25, Y+35	; 0x23
+ d7a:	01 97       	sbiw	r24, 0x01	; 1
+ d7c:	88 0f       	add	r24, r24
+ d7e:	99 1f       	adc	r25, r25
+ d80:	fc 01       	movw	r30, r24
+ d82:	ed 56       	subi	r30, 0x6D	; 109
+ d84:	ff 4f       	sbci	r31, 0xFF	; 255
+ d86:	20 81       	ld	r18, Z
+ d88:	31 81       	ldd	r19, Z+1	; 0x01
+ d8a:	ca 01       	movw	r24, r20
+ d8c:	88 0f       	add	r24, r24
+ d8e:	99 1f       	adc	r25, r25
+ d90:	88 0f       	add	r24, r24
+ d92:	99 1f       	adc	r25, r25
+ d94:	fc 01       	movw	r30, r24
+ d96:	ee 51       	subi	r30, 0x1E	; 30
+ d98:	fc 4f       	sbci	r31, 0xFC	; 252
+ d9a:	31 83       	std	Z+1, r19	; 0x01
+ d9c:	20 83       	st	Z, r18
+						m2=m2+2;
+ d9e:	88 8d       	ldd	r24, Y+24	; 0x18
+ da0:	99 8d       	ldd	r25, Y+25	; 0x19
+ da2:	02 96       	adiw	r24, 0x02	; 2
+ da4:	99 8f       	std	Y+25, r25	; 0x19
+ da6:	88 8f       	std	Y+24, r24	; 0x18
+				}
+			
+			}
+			else//播放按下的音符
+			{
+				while(isKeyPress())
+ da8:	0e 94 c0 00 	call	0x180	; 0x180 <isKeyPress>
+ dac:	88 23       	and	r24, r24
+ dae:	09 f0       	breq	.+2      	; 0xdb2 <__stack+0x953>
+ db0:	8b cf       	rjmp	.-234    	; 0xcc8 <__stack+0x869>
+						music_p[m1][1]=m3/7;
+						music_p[m1+1][0]=music[k-1];
+						m2=m2+2;
+					 }
+				}
+				if(j)
+ db2:	8c 8d       	ldd	r24, Y+28	; 0x1c
+ db4:	9d 8d       	ldd	r25, Y+29	; 0x1d
+ db6:	00 97       	sbiw	r24, 0x00	; 0
+ db8:	c1 f0       	breq	.+48     	; 0xdea <__stack+0x98b>
+				{
+					 m3=0;
+ dba:	1f 8a       	std	Y+23, r1	; 0x17
+ dbc:	1e 8a       	std	Y+22, r1	; 0x16
+					 music_p[m1+1][1]=m2;
+ dbe:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ dc0:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ dc2:	01 96       	adiw	r24, 0x01	; 1
+ dc4:	28 8d       	ldd	r18, Y+24	; 0x18
+ dc6:	39 8d       	ldd	r19, Y+25	; 0x19
+ dc8:	88 0f       	add	r24, r24
+ dca:	99 1f       	adc	r25, r25
+ dcc:	01 96       	adiw	r24, 0x01	; 1
+ dce:	88 0f       	add	r24, r24
+ dd0:	99 1f       	adc	r25, r25
+ dd2:	fc 01       	movw	r30, r24
+ dd4:	ee 51       	subi	r30, 0x1E	; 30
+ dd6:	fc 4f       	sbci	r31, 0xFC	; 252
+ dd8:	31 83       	std	Z+1, r19	; 0x01
+ dda:	20 83       	st	Z, r18
+					 m1+=2;
+ ddc:	8a 8d       	ldd	r24, Y+26	; 0x1a
+ dde:	9b 8d       	ldd	r25, Y+27	; 0x1b
+ de0:	02 96       	adiw	r24, 0x02	; 2
+ de2:	9b 8f       	std	Y+27, r25	; 0x1b
+ de4:	8a 8f       	std	Y+26, r24	; 0x1a
+					 m2=0;
+ de6:	19 8e       	std	Y+25, r1	; 0x19
+ de8:	18 8e       	std	Y+24, r1	; 0x18
+				}
+				DDRD&=~0x30;
+ dea:	a1 e3       	ldi	r26, 0x31	; 49
+ dec:	b0 e0       	ldi	r27, 0x00	; 0
+ dee:	e1 e3       	ldi	r30, 0x31	; 49
+ df0:	f0 e0       	ldi	r31, 0x00	; 0
+ df2:	80 81       	ld	r24, Z
+ df4:	8f 7c       	andi	r24, 0xCF	; 207
+ df6:	8c 93       	st	X, r24
+ df8:	55 cb       	rjmp	.-2390   	; 0x4a4 <__stack+0x45>
+
+00000dfa <__divmodhi4>:
+ dfa:	97 fb       	bst	r25, 7
+ dfc:	09 2e       	mov	r0, r25
+ dfe:	07 26       	eor	r0, r23
+ e00:	0a d0       	rcall	.+20     	; 0xe16 <__divmodhi4_neg1>
+ e02:	77 fd       	sbrc	r23, 7
+ e04:	04 d0       	rcall	.+8      	; 0xe0e <__divmodhi4_neg2>
+ e06:	27 d0       	rcall	.+78     	; 0xe56 <__udivmodhi4>
+ e08:	06 d0       	rcall	.+12     	; 0xe16 <__divmodhi4_neg1>
+ e0a:	00 20       	and	r0, r0
+ e0c:	1a f4       	brpl	.+6      	; 0xe14 <__divmodhi4_exit>
+
+00000e0e <__divmodhi4_neg2>:
+ e0e:	70 95       	com	r23
+ e10:	61 95       	neg	r22
+ e12:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000e14 <__divmodhi4_exit>:
+ e14:	08 95       	ret
+
+00000e16 <__divmodhi4_neg1>:
+ e16:	f6 f7       	brtc	.-4      	; 0xe14 <__divmodhi4_exit>
+ e18:	90 95       	com	r25
+ e1a:	81 95       	neg	r24
+ e1c:	9f 4f       	sbci	r25, 0xFF	; 255
+ e1e:	08 95       	ret
+
+00000e20 <__divmodsi4>:
+ e20:	97 fb       	bst	r25, 7
+ e22:	09 2e       	mov	r0, r25
+ e24:	05 26       	eor	r0, r21
+ e26:	0e d0       	rcall	.+28     	; 0xe44 <__divmodsi4_neg1>
+ e28:	57 fd       	sbrc	r21, 7
+ e2a:	04 d0       	rcall	.+8      	; 0xe34 <__divmodsi4_neg2>
+ e2c:	28 d0       	rcall	.+80     	; 0xe7e <__udivmodsi4>
+ e2e:	0a d0       	rcall	.+20     	; 0xe44 <__divmodsi4_neg1>
+ e30:	00 1c       	adc	r0, r0
+ e32:	38 f4       	brcc	.+14     	; 0xe42 <__divmodsi4_exit>
+
+00000e34 <__divmodsi4_neg2>:
+ e34:	50 95       	com	r21
+ e36:	40 95       	com	r20
+ e38:	30 95       	com	r19
+ e3a:	21 95       	neg	r18
+ e3c:	3f 4f       	sbci	r19, 0xFF	; 255
+ e3e:	4f 4f       	sbci	r20, 0xFF	; 255
+ e40:	5f 4f       	sbci	r21, 0xFF	; 255
+
+00000e42 <__divmodsi4_exit>:
+ e42:	08 95       	ret
+
+00000e44 <__divmodsi4_neg1>:
+ e44:	f6 f7       	brtc	.-4      	; 0xe42 <__divmodsi4_exit>
+ e46:	90 95       	com	r25
+ e48:	80 95       	com	r24
+ e4a:	70 95       	com	r23
+ e4c:	61 95       	neg	r22
+ e4e:	7f 4f       	sbci	r23, 0xFF	; 255
+ e50:	8f 4f       	sbci	r24, 0xFF	; 255
+ e52:	9f 4f       	sbci	r25, 0xFF	; 255
+ e54:	08 95       	ret
+
+00000e56 <__udivmodhi4>:
+ e56:	aa 1b       	sub	r26, r26
+ e58:	bb 1b       	sub	r27, r27
+ e5a:	51 e1       	ldi	r21, 0x11	; 17
+ e5c:	07 c0       	rjmp	.+14     	; 0xe6c <__udivmodhi4_ep>
+
+00000e5e <__udivmodhi4_loop>:
+ e5e:	aa 1f       	adc	r26, r26
+ e60:	bb 1f       	adc	r27, r27
+ e62:	a6 17       	cp	r26, r22
+ e64:	b7 07       	cpc	r27, r23
+ e66:	10 f0       	brcs	.+4      	; 0xe6c <__udivmodhi4_ep>
+ e68:	a6 1b       	sub	r26, r22
+ e6a:	b7 0b       	sbc	r27, r23
+
+00000e6c <__udivmodhi4_ep>:
+ e6c:	88 1f       	adc	r24, r24
+ e6e:	99 1f       	adc	r25, r25
+ e70:	5a 95       	dec	r21
+ e72:	a9 f7       	brne	.-22     	; 0xe5e <__udivmodhi4_loop>
+ e74:	80 95       	com	r24
+ e76:	90 95       	com	r25
+ e78:	bc 01       	movw	r22, r24
+ e7a:	cd 01       	movw	r24, r26
+ e7c:	08 95       	ret
+
+00000e7e <__udivmodsi4>:
+ e7e:	a1 e2       	ldi	r26, 0x21	; 33
+ e80:	1a 2e       	mov	r1, r26
+ e82:	aa 1b       	sub	r26, r26
+ e84:	bb 1b       	sub	r27, r27
+ e86:	fd 01       	movw	r30, r26
+ e88:	0d c0       	rjmp	.+26     	; 0xea4 <__udivmodsi4_ep>
+
+00000e8a <__udivmodsi4_loop>:
+ e8a:	aa 1f       	adc	r26, r26
+ e8c:	bb 1f       	adc	r27, r27
+ e8e:	ee 1f       	adc	r30, r30
+ e90:	ff 1f       	adc	r31, r31
+ e92:	a2 17       	cp	r26, r18
+ e94:	b3 07       	cpc	r27, r19
+ e96:	e4 07       	cpc	r30, r20
+ e98:	f5 07       	cpc	r31, r21
+ e9a:	20 f0       	brcs	.+8      	; 0xea4 <__udivmodsi4_ep>
+ e9c:	a2 1b       	sub	r26, r18
+ e9e:	b3 0b       	sbc	r27, r19
+ ea0:	e4 0b       	sbc	r30, r20
+ ea2:	f5 0b       	sbc	r31, r21
+
+00000ea4 <__udivmodsi4_ep>:
+ ea4:	66 1f       	adc	r22, r22
+ ea6:	77 1f       	adc	r23, r23
+ ea8:	88 1f       	adc	r24, r24
+ eaa:	99 1f       	adc	r25, r25
+ eac:	1a 94       	dec	r1
+ eae:	69 f7       	brne	.-38     	; 0xe8a <__udivmodsi4_loop>
+ eb0:	60 95       	com	r22
+ eb2:	70 95       	com	r23
+ eb4:	80 95       	com	r24
+ eb6:	90 95       	com	r25
+ eb8:	9b 01       	movw	r18, r22
+ eba:	ac 01       	movw	r20, r24
+ ebc:	bd 01       	movw	r22, r26
+ ebe:	cf 01       	movw	r24, r30
+ ec0:	08 95       	ret
+
+00000ec2 <_exit>:
+ ec2:	f8 94       	cli
+
+00000ec4 <__stop_program>:
+ ec4:	ff cf       	rjmp	.-2      	; 0xec4 <__stop_program>
